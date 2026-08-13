@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive, facilitator-led presentations about generative AI, meaning, prediction, and verification.">
+  <title>Generative AI Presentations</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f8efe1;
+      --card: #fffaf3;
+      --ink: #25211f;
+      --muted: #6d6258;
+      --clay: #bd6737;
+      --clay-dark: #7c3f20;
+      --sage: #dbe6ca;
+      --olive: #6d7b53;
+      --lavender: #e9e1ed;
+      --line: rgba(37, 33, 31, 0.16);
+      --shadow: 0 24px 70px rgba(65, 48, 34, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: #24211f; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 88% 12%, rgba(122, 138, 94, 0.22), transparent 27rem),
+        radial-gradient(circle at 8% 88%, rgba(198, 113, 57, 0.18), transparent 30rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 52px;
+      margin-bottom: clamp(52px, 8vw, 100px);
+    }
+
+    .brand {
+      margin: 0;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .source-link {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+      text-underline-offset: 4px;
+    }
+
+    .source-link:hover { color: var(--ink); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: clamp(36px, 7vw, 84px);
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--clay-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 28px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--clay);
+      content: "";
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.4rem, 8vw, 7.6rem);
+      font-weight: 700;
+      letter-spacing: -0.055em;
+      line-height: 0.88;
+    }
+
+    .intro {
+      max-width: 620px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+      line-height: 1.55;
+    }
+
+    .deck-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .deck-preview {
+      position: relative;
+      display: flex;
+      min-height: 310px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px;
+      background:
+        linear-gradient(115deg, transparent 0 56%, rgba(255, 255, 255, 0.32) 56% 100%),
+        var(--sage);
+    }
+
+    .deck-preview::after {
+      position: absolute;
+      right: -86px;
+      bottom: -106px;
+      width: 280px;
+      height: 280px;
+      border: 34px solid rgba(109, 123, 83, 0.22);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .deck-kicker {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: #4c583d;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .deck-title {
+      position: relative;
+      z-index: 1;
+      max-width: 360px;
+      margin: 38px 0 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      letter-spacing: -0.045em;
+      line-height: 0.92;
+    }
+
+    .deck-meta {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .deck-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: transparent;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+    }
+
+    .button.primary {
+      border-color: var(--ink);
+      color: #fffaf3;
+      background: var(--ink);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 24px rgba(37, 33, 31, 0.13);
+    }
+
+    .button:focus-visible,
+    .source-link:focus-visible {
+      outline: 4px solid rgba(189, 103, 55, 0.34);
+      outline-offset: 4px;
+    }
+
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: clamp(64px, 9vw, 110px);
+    }
+
+    .resource {
+      min-height: 170px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      background: rgba(255, 250, 243, 0.72);
+    }
+
+    .resource:nth-child(2) { background: rgba(233, 225, 237, 0.65); }
+    .resource:nth-child(3) { background: rgba(219, 230, 202, 0.65); }
+
+    .resource h2 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.45rem;
+      letter-spacing: -0.025em;
+    }
+
+    .resource p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .resource a {
+      font-weight: 800;
+      text-underline-offset: 4px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 70px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer p { margin: 0; }
+
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; }
+      .deck-card { max-width: 580px; }
+      .resources { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 24px, 1120px); padding-top: 16px; }
+      .topbar { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .deck-preview { min-height: 270px; padding: 26px; }
+      .deck-actions { grid-template-columns: 1fr; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <p class="brand">Generative AI Presentations</p>
+      <a class="source-link" href="https://github.com/saberkhan372/GenAIPresentations">View source on GitHub ↗</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Interactive workshop materials</p>
+          <h1 id="page-title">Meaningful ways into generative AI.</h1>
+          <p class="intro">Facilitator-led presentations that turn abstract ideas about context, prediction, and verification into things a room can see, discuss, and test together.</p>
+        </div>
+
+        <article class="deck-card" aria-labelledby="meaning-prediction-title">
+          <div class="deck-preview">
+            <p class="deck-kicker">Featured presentation</p>
+            <div>
+              <h2 class="deck-title" id="meaning-prediction-title">Meaning ↔ Prediction</h2>
+              <p class="deck-meta">15 slides · interactive webpage · facilitator-led</p>
+            </div>
+          </div>
+          <div class="deck-actions">
+            <a class="button primary" href="./meaning-prediction/">Open presentation</a>
+            <a class="button" href="./meaning-prediction/facilitator-guide.md">Facilitator guide</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="resources" aria-label="Presentation resources">
+        <article class="resource">
+          <h2>Run the lesson</h2>
+          <p>Preparation, controls, slide-by-slide directions, contingencies, and privacy boundaries.</p>
+          <a href="./meaning-prediction/facilitator-guide.md">Read the facilitator guide →</a>
+        </article>
+        <article class="resource">
+          <h2>Understand the design</h2>
+          <p>Why the lesson is projection-first, how the interactions work, and where the analogy stops.</p>
+          <a href="./meaning-prediction/development-notes.md">Read development notes →</a>
+        </article>
+        <article class="resource">
+          <h2>Inspect the materials</h2>
+          <p>The presentation, local corpus, and supporting files are published together for transparency.</p>
+          <a href="https://github.com/saberkhan372/GenAIPresentations/tree/main/meaning-prediction">Browse the source →</a>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>Workshop materials for exploring context, prediction, and verification.</p>
+      <p>The lesson code collects no participant submissions.</p>
+    </footer>
+  </div>
+</body>
+</html>

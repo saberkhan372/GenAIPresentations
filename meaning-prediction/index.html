@@ -973,6 +973,48 @@
     .next-move b { color: var(--clay-dark); font-size: 17px; letter-spacing: .08em; text-transform: uppercase; }
     .next-move span { margin-top: 6px; font-size: 24px; font-weight: 700; line-height: 1.2; }
 
+    /* Slide 16: optional transparency afterword */
+    .impact-slide { flex-direction: column; padding: 50px 76px 48px; background: #f3ebdf; }
+    .impact-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; margin-top: 10px; }
+    .impact-heading h2 { max-width: 1040px; font-size: 68px; line-height: .98; }
+    .impact-heading p { max-width: 520px; padding-bottom: 7px; color: var(--muted); font-size: 27px; font-weight: 700; line-height: 1.28; text-align: right; }
+    .impact-main { display: grid; grid-template-columns: 1.08fr .92fr; gap: 24px; margin-top: 22px; }
+    .impact-card { min-height: 455px; padding: 26px 30px 24px; }
+    .impact-card h3 { font-size: 34px; }
+    .impact-card-intro { margin-top: 7px; color: var(--muted); font-size: 18px; line-height: 1.32; }
+    .contribution-lens { margin-top: 17px; padding-top: 15px; border-top: 2px solid rgba(100, 92, 80, .19); }
+    .contribution-lens:first-of-type { margin-top: 15px; }
+    .lens-title { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
+    .lens-title strong { font-size: 22px; }
+    .lens-title span { color: var(--muted); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+    .share-chips { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 8px; margin-top: 9px; }
+    .share-chip { padding: 9px 12px; border-radius: 14px; font-size: 17px; font-weight: 800; text-align: center; }
+    .share-chip.saber { background: var(--peach); color: var(--clay-dark); }
+    .share-chip.codex { background: var(--sage); color: #465133; }
+    .share-chip.claude { background: #e4d8e8; color: #594161; }
+    .human-effort { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; margin-top: 17px; padding: 12px 16px; border-radius: 16px; background: var(--dark); color: #fff; }
+    .human-effort strong { color: #ffd2b7; font-family: "Fraunces", Georgia, serif; font-size: 29px; white-space: nowrap; }
+    .human-effort span { font-size: 17px; line-height: 1.26; }
+    .footprint-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .footprint-row { padding: 15px 17px; border-radius: 18px; background: #ebe3d7; }
+    .footprint-row.course { background: #e1eecc; }
+    .footprint-row b { display: block; color: var(--muted); font-size: 16px; letter-spacing: .06em; text-transform: uppercase; }
+    .footprint-row strong { display: block; margin-top: 5px; font-family: "Fraunces", Georgia, serif; font-size: 25px; line-height: 1.15; }
+    .footprint-row small { display: block; margin-top: 4px; color: var(--muted); font-size: 15px; line-height: 1.25; }
+    .unknown-total { margin-top: 11px; padding: 10px 14px; border-left: 6px solid var(--clay); border-radius: 11px; background: #fff3e9; font-size: 16px; font-weight: 700; line-height: 1.28; }
+    .impact-scale { display: grid; grid-template-columns: 175px repeat(3, 1fr); gap: 11px; align-items: stretch; margin-top: 15px; }
+    .scale-label { display: flex; flex-direction: column; justify-content: center; padding: 15px 18px; border-radius: 18px; background: var(--dark); color: #fff; }
+    .scale-label strong { color: #ffd2b7; font-family: "Fraunces", Georgia, serif; font-size: 24px; }
+    .scale-label span { margin-top: 4px; font-size: 14px; line-height: 1.25; }
+    .scale-card { padding: 13px 18px; border: 2px solid var(--line); border-radius: 18px; background: var(--paper); }
+    .scale-card b { display: block; color: var(--clay-dark); font-size: 16px; letter-spacing: .06em; text-transform: uppercase; }
+    .scale-card strong { display: block; margin-top: 4px; font-size: 20px; line-height: 1.22; }
+    .scale-card span { display: block; margin-top: 3px; color: var(--muted); font-size: 14px; line-height: 1.25; }
+    .safeguard-strip { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 15px; margin-top: 12px; padding: 12px 18px; border: 2px solid #c9bba8; border-radius: 17px; background: #fffaf3; color: #4d463d; font-size: 17px; font-weight: 750; line-height: 1.27; }
+    .safeguard-strip strong { color: var(--clay-dark); font-size: 18px; }
+    .impact-footnote { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.25; }
+    .impact-footnote a { color: var(--clay-dark); font-weight: 800; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
@@ -1367,6 +1409,88 @@
           <div class="next-move"><b>Bring back</b><span>One observation or question</span></div>
         </div>
       </section>
+
+      <section class="slide impact-slide" data-label="AI accounting" data-notes="Optional transparency afterword. Slide 15 is the real close; stop there unless the room asks who made the lesson or what its AI use cost. Every environmental number is a scenario estimate, not provider telemetry. The workshop deck and Spring Gen AI class are separate scopes. The class midpoint models teacher preparation plus student use from de-identified aggregate activity totals only: 98 document submissions and 171 submitted media files. Its 0.8–81 kWh span is a scenario envelope, not a confidence interval; unknown video mix and retries dominate. No student work, names, grades, rosters, prompts, or accounts were opened or published for this estimate. U.S. and Bangladesh figures allocate national electricity across residents and provide scale only; they do not identify where computation ran. The water comparison is volume only because AI operational water consumption and municipal water withdrawal are different measures. External tools retain their own terms and data practices." aria-labelledby="slide-16-title">
+        <div class="eyebrow">Afterword · optional · estimated, not metered</div>
+        <div class="impact-heading">
+          <h2 id="slide-16-title">This deck is also evidence.</h2>
+          <p>Who made it—and what did it cost?</p>
+        </div>
+
+        <div class="impact-main">
+          <article class="card impact-card" aria-labelledby="originality-title">
+            <h3 id="originality-title">Originality has two answers</h3>
+            <p class="impact-card-intro">Ranges from two independent retrospective estimates—not telemetry or a score.</p>
+
+            <div class="contribution-lens">
+              <div class="lens-title"><strong>Direction + judgment</strong><span>Who chose and checked?</span></div>
+              <div class="share-chips" aria-label="Estimated direction and judgment contribution">
+                <span class="share-chip saber">Saber 65–75%</span>
+                <span class="share-chip codex">Codex 15–25%</span>
+                <span class="share-chip claude">Claude 8–15%</span>
+              </div>
+            </div>
+
+            <div class="contribution-lens">
+              <div class="lens-title"><strong>Literal words + code</strong><span>Who produced the surface?</span></div>
+              <div class="share-chips" aria-label="Estimated literal words and code contribution">
+                <span class="share-chip saber">Saber 5–10%</span>
+                <span class="share-chip codex">Codex 50–60%</span>
+                <span class="share-chip claude">Claude 35–45%</span>
+              </div>
+            </div>
+
+            <div class="human-effort">
+              <strong>≈4 active hours</strong>
+              <span>Saber’s direction, testing, correction, and final decisions inside a ≈6-hour build window.</span>
+            </div>
+          </article>
+
+          <article class="card impact-card" aria-labelledby="footprint-title">
+            <h3 id="footprint-title">Modeled AI footprint</h3>
+            <p class="impact-card-intro">Two separate scopes. Scenario estimates—not provider telemetry.</p>
+
+            <div class="footprint-rows">
+              <div class="footprint-row">
+                <b>This workshop deck</b>
+                <strong>≈1 kWh · 0.35 kg CO₂e · 3–4 L</strong>
+                <small>Range: 0.3–3 kWh · 0.1–12 L</small>
+              </div>
+              <div class="footprint-row course">
+                <b>Spring Gen AI class</b>
+                <strong>≈6 kWh · 2 kg CO₂e · 20 L</strong>
+                <small>Teacher preparation + modeled student use</small>
+              </div>
+            </div>
+            <p class="unknown-total"><strong>Class scenario span: 0.8–81 kWh · 0.3–28 kg · 3–280 L.</strong> Video mix and retries dominate; this is not a confidence interval.</p>
+          </article>
+        </div>
+
+        <div class="impact-scale" aria-label="Per-person national scale comparisons">
+          <div class="scale-label"><strong>For scale</strong><span>National averages per resident—not equivalent footprints.</span></div>
+          <div class="scale-card">
+            <b>Electricity</b>
+            <strong>U.S. 35 kWh/day · Bangladesh 1.7 kWh/day</strong>
+            <span>The deck’s ≈1 kWh equals about 41 U.S. minutes or 14½ Bangladesh hours.</span>
+          </div>
+          <div class="scale-card">
+            <b>Municipal water withdrawn</b>
+            <strong>U.S. 480 L/day · Bangladesh 58 L/day</strong>
+            <span>Deck water volume equals about 11 U.S. minutes or 1½ Bangladesh hours; AI consumption is a different metric.</span>
+          </div>
+          <div class="scale-card">
+            <b>Territorial CO₂</b>
+            <strong>U.S. 37 kg/day · Bangladesh 1.9 kg/day</strong>
+            <span>The deck’s ≈0.35 kg equals about 14 U.S. minutes or 4½ Bangladesh hours.</span>
+          </div>
+        </div>
+
+        <div class="safeguard-strip">
+          <strong>Safeguards used</strong>
+          <span>Only de-identified totals were used. No student work, names, grades, rosters, prompts, or accounts were opened or published. The deck stores no names, files, or images; reload clears room state. External tools set their own privacy terms.</span>
+        </div>
+        <p class="impact-footnote">Modeled with ≥3× uncertainty. <a href="./AI-accounting.md" target="_blank" rel="noopener noreferrer">Sources and method ↗</a> · Slide 15 remains the intended close.</p>
+      </section>
     </main>
 
     <aside id="notes-panel" aria-hidden="true" aria-label="Facilitator notes">
@@ -1376,7 +1500,7 @@
 
     <div id="deck-controls" aria-label="Presentation controls">
       <button type="button" id="prev-slide" aria-label="Previous slide">←</button>
-      <span id="slide-counter" aria-live="polite">1 / 15</span>
+      <span id="slide-counter" aria-live="polite">1 / 16</span>
       <button type="button" id="next-slide" aria-label="Next slide">→</button>
       <button type="button" id="notes-toggle" aria-label="Toggle facilitator notes" aria-controls="notes-panel" aria-pressed="false">Notes</button>
       <button type="button" id="fullscreen-toggle" aria-label="Toggle fullscreen" aria-pressed="false">Full</button>

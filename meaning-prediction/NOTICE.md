@@ -25,6 +25,12 @@ Those services have their own terms, privacy policies, request logs, account his
 
 The prompt-and-output examples used in the labeling activity are constructed instructional illustrations. They are not represented as captured output from a named model.
 
+## AI contribution and environmental estimates
+
+The optional Slide 16 afterword reports retrospective scenarios rather than metered provider usage. The workshop deck and Spring Gen AI class are separate scopes. The class midpoint uses only de-identified aggregate activity totals; its wide scenario envelope reflects unknown video mix and retries. The U.S. and Bangladesh comparisons are scale references only, and the water figures compare volume across different accounting measures. Sources, assumptions, contribution lenses, and uncertainty are documented in [`AI-accounting.md`](./AI-accounting.md).
+
+The public repository excludes student work, grades, rosters, and internal review traces. The lesson does not solicit or upload participant names, files, or generated images, and page state clears on reload. Those safeguards do not extend to the independent external services listed above.
+
 ## Reuse
 
 No open-source or content license is included in this repository at this time. Public access to the files does not by itself grant permission to reuse, modify, or redistribute them. Third-party sources and services retain their own applicable terms.

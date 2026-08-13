@@ -1,6 +1,6 @@
 # Meaning ↔ Prediction
 
-**Meaning ↔ Prediction** is a 15-slide, facilitator-led workshop about how context shapes possible continuations—and why fluent generated output still needs interpretation and verification.
+**Meaning ↔ Prediction** is a 16-slide, facilitator-led workshop about how context shapes possible continuations—and why fluent generated output still needs interpretation and verification. Slide 15 is the pedagogical close; Slide 16 is an optional transparency afterword.
 
 The lesson uses journals and room discussion for most activities. Participants open computers only for an optional, live A/B image-generation comparison near the end.
 
@@ -18,6 +18,7 @@ The title uses a two-way arrow deliberately: meaning shapes what seems likely ne
 - `corpus-data.js` — the local Founding & Rights corpus used by the Prediction Machine
 - `facilitator-guide.md` — setup, slide directions, contingencies, and rehearsal checklist
 - `development-notes.md` — public design rationale and implementation boundaries
+- `AI-accounting.md` — modeled AI contribution, environmental estimates, uncertainty, and sources
 - `verify.js` — portable deterministic checks using only Node.js built-ins
 - `NOTICE.md` — source attribution and external-service notes
 
@@ -56,3 +57,7 @@ The Prediction Machine displays empirical frequencies from exact matches in a sm
 The lesson’s central distinction is:
 
 > Both narrow possible continuations using the text so far. This machine counts exact matches. A language model uses learned patterns—and can produce fluent text without a matching source passage. That is why fluency still needs verification.
+
+## Optional transparency afterword
+
+Slide 16 applies the lesson's own verification stance to its production. It separates human-led direction and judgment from literal text/code production, reports energy, carbon, and water as modeled ranges rather than measurements, and states what cannot be estimated. See [AI-accounting.md](./AI-accounting.md) for the method, sources, and comparison limits.

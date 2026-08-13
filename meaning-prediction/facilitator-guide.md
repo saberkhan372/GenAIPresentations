@@ -1,6 +1,6 @@
 # Meaning ↔ Prediction — Facilitator Guide
 
-This guide accompanies the canonical 15-slide webpage in this folder. It is written for the person operating the projected deck and leading the room. It is not participant-facing copy and does not replace the interactive webpage. For the development history and rationale behind these choices, see [design.md](./design.md).
+This guide accompanies the canonical 16-slide webpage in this folder: a 15-slide lesson plus one optional transparency afterword. It is written for the person operating the projected deck and leading the room. It is not participant-facing copy and does not replace the interactive webpage. For the development history and rationale behind these choices, see [design.md](./design.md).
 
 The lesson is projection-first. Participants use journals for most of the session and open computers only for the image comparison on Slide 12. One facilitator operates the deck. Any participant may observe, record, question, or decline instead of using an AI tool.
 
@@ -62,7 +62,7 @@ A participant who does not want to use an AI tool can fully participate as an ob
 Do this check on the actual presentation computer, browser, projector, and venue network. A successful test on another machine is useful but not conclusive.
 
 1. Open `index.html` from the canonical folder.
-2. Confirm that Slide 1 appears and the persistent counter reads `1 / 15`.
+2. Confirm that Slide 1 appears and the persistent counter reads `1 / 16`.
 3. Confirm that no full-screen startup error reports a missing corpus. If it does, put `corpus-data.js` back in the same folder as `index.html` and reload.
 4. Set browser zoom to 100%. Enter full screen and inspect the edges of every slide for clipping at the actual projector resolution.
 5. On Slide 2, confirm that Long Story Short loads inside the frame. Also test **Open Long Story Short ↗** in a separate tab; this is the fallback if embedding is blocked.
@@ -74,9 +74,10 @@ Do this check on the actual presentation computer, browser, projector, and venue
    - Slide 11: change scenario, choose a label, and label and clear a phrase; and
    - Slide 12: switch between both prompt sets and confirm the prompt text changes; and
    - Slide 14: add a table, change A and B counts in both rows, and lower the denominator.
-8. Reload the page. Confirm that dots, added perspective ideas, prediction history, annotations, the prompt-set choice, and tally counts all clear.
-9. Leave the direct Long Story Short link available in another tab if the embed has been unreliable.
-10. Decide where you will shorten the lesson if image generation or discussion takes longer than expected. Recommended cuts appear in the pacing section below.
+8. Inspect optional Slide 16 for projector fit. Confirm that it says **estimated, not metered**; distinguishes **this workshop deck** from the separate **Spring Gen AI class** scenario; shows the class midpoint and wide scenario span; and keeps the safeguard strip legible.
+9. Reload the page. Confirm that dots, added perspective ideas, prediction history, annotations, the prompt-set choice, and tally counts all clear.
+10. Leave the direct Long Story Short link available in another tab if the embed has been unreliable.
+11. Decide where you will shorten the lesson if image generation or discussion takes longer than expected. Recommended cuts appear in the pacing section below.
 
 ### Optional arrival sequence
 
@@ -100,6 +101,7 @@ Be precise about privacy:
 - Do not say that “nothing leaves the room.” That claim would be inaccurate when external services are used.
 - The room matrix is anonymous by design. Do not ask participants to label dots or interpret a cluster as a participant profile.
 - The room tally records aggregate counts only. Do not enter demographic guesses or infer identity, intent, or character from a generated image.
+- The public lesson build excludes student work, grades, rosters, and internal review traces. Do not copy any of those materials into the canonical or public folder to “support” Slide 16.
 
 ## Suggested pacing — facilitator discretion
 
@@ -113,6 +115,7 @@ The deck intentionally shows no time estimates. The following is a private plann
 | Part Two · Prediction | 8–11 | About 15 minutes | Give Slide 9 the largest share; one strong phrase is better than trying every starting word. Use one labeling scenario if needed. |
 | Part Three · Investigation | 12–14 | About 12 minutes | Generation speed is unpredictable. Choose one prompt set. If needed, collect one whole-room pair instead of one per table. |
 | Close | 15 | About 3 minutes | Protect at least one private journal response and the final distinction between output and evidence. |
+| Optional transparency afterword | 16 | Outside the required 45-minute arc | Show only if authorship, AI use, or environmental cost comes up. Do not let it replace the Slide 15 close. |
 
 For a shorter version:
 
@@ -124,7 +127,7 @@ For a shorter version:
 
 Do not shorten by skipping Slide 10. The distinction between transparent lookup and learned prediction is the conceptual guardrail for the lesson.
 
-The background shifts are facilitation cues, not new content slides. Peach with a clay rail marks **Part One · Meaning** on Slides 5–7; pale sage with an olive rail marks **Part Two · Prediction** on Slides 8–11; lavender with a plum rail marks **Part Three · Investigation** on Slides 12–14. Each part repeats the same rail, circle motif, and eyebrow structure. Slides 1–4 and 15 are neutral bookends.
+The background shifts are facilitation cues, not new content slides. Peach with a clay rail marks **Part One · Meaning** on Slides 5–7; pale sage with an olive rail marks **Part Two · Prediction** on Slides 8–11; lavender with a plum rail marks **Part Three · Investigation** on Slides 12–14. Each part repeats the same rail, circle motif, and eyebrow structure. Slides 1–4, the Slide 15 close, and optional Slide 16 remain outside the part treatments.
 
 ## Presentation controls
 
@@ -133,14 +136,14 @@ The persistent controls at the lower right are visible on every slide:
 - **← / →:** previous or next slide;
 - **Notes:** open or close the facilitator notes embedded in the webpage;
 - **Full:** request browser full-screen mode; and
-- **current / 15:** current slide and total slide count.
+- **current / 16:** current slide and total slide count.
 
 Keyboard navigation:
 
 - **Right Arrow**, **Page Down**, or **Space:** next slide;
 - **Left Arrow** or **Page Up:** previous slide;
 - **Home:** Slide 1;
-- **End:** Slide 15;
+- **End:** optional Slide 16. To deliver the normal close, navigate to Slide 15 and stop there;
 - **N:** toggle facilitator notes when focus is not inside an interactive control; and
 - **Escape:** close facilitator notes. In the matrix, Escape first clears matrix selection and returns focus to the Next control.
 
@@ -775,6 +778,41 @@ Name the sequence as one possible way to keep inquiry moving: observe practice, 
 
 Do not turn the final share into a requirement. A private journal response is a complete close.
 
+### Slide 16 — This deck is also evidence. (optional afterword)
+
+**Purpose**
+
+Answer an authorship or environmental-cost question transparently without pretending retrospective estimates are telemetry. This slide is not a second close. Use it after Slide 15 only if it serves a question in the room.
+
+**Before showing it**
+
+Say plainly:
+
+> The lesson is over; this is an optional accounting note. These are modeled ranges, not metered totals.
+
+**Facilitation**
+
+1. Keep the two originality lenses separate. **Direction + judgment** concerns who set the purpose, pedagogy, boundaries, corrections, and final decisions. **Literal words + code** concerns who produced the prose and implementation surface. Do not combine them into one ownership score.
+2. Name Saber’s estimated **four active hours** as direction, testing, correction, and final decisions inside an approximately six-hour final build window—not as the total time invested in the course.
+3. Read the environmental rows as separate scopes. **This workshop deck** is approximately **1 kWh, 0.35 kg CO₂e, and 3–4 L**. The **Spring Gen AI class** central scenario is approximately **6 kWh, 2 kg CO₂e, and 20 L**, including modeled teacher preparation and modeled student use. Do not add the rows.
+4. Name the class scenario's unusually wide span: **0.8–81 kWh, 0.3–28 kg CO₂e, and 3–280 L**. This is a scenario envelope, not a confidence interval. Unknown video mix and retries dominate the width.
+5. Explain what made the rough student estimate possible without inspecting student work: only de-identified totals—**98 document submissions** and **171 submitted media files**—were used. No provider telemetry exists, and local laptops/displays, storage and network transfer, embodied hardware, and model training remain outside the scenario.
+6. Treat the U.S. and Bangladesh figures as per-resident national scale references only. They are not matched project footprints and do not identify where the project's computation ran.
+7. State the water boundary: AI operational water consumption and municipal water withdrawal are different measures; the comparison is volume-only.
+8. Read or paraphrase the safeguards: **Only de-identified totals were used. No student work, names, grades, rosters, prompts, or accounts were opened or published.** The deck collects no names, files, or images; room state clears on reload; and external tools retain their own privacy practices.
+
+**Suggested language**
+
+> People set the purpose and made the final judgments; AI systems produced much of the literal surface and review. This workshop deck is modeled at about 1 kWh. A separate Spring-class scenario—teacher preparation plus modeled student use—is about 6 kWh, with a very wide span because video and retries matter. Only de-identified totals were used; no student material or account information was opened.
+
+**If someone asks for a single exact number**
+
+Point to the range and the **estimated, not metered** label. Explain that the Codex and Claude retrospective token estimates differed by roughly threefold and neither had provider telemetry. The agreement is an order of magnitude, not precision. Direct them to [`AI-accounting.md`](./AI-accounting.md) for the method and sources.
+
+**Exit**
+
+Do not end the workshop here. If Slide 16 was shown, briefly return verbally to Slide 15’s final question: **What should we verify or test?**
+
 ## Contingency plans
 
 ### Long Story Short is blank or blocked
@@ -823,7 +861,7 @@ Use private journals first, then invite table-level rather than individual repor
 
 ### The session runs short
 
-Protect Slide 10 and Slide 15. Use one perspective on Slide 6, one starting word on Slide 9, one example on Slide 11, and one whole-room image pair. It is better to complete the conceptual arc with fewer examples than to end after generation without investigation.
+Protect Slide 10 and Slide 15. Skip optional Slide 16. Use one perspective on Slide 6, one starting word on Slide 9, one example on Slide 11, and one whole-room image pair. It is better to complete the conceptual arc with fewer examples than to end after generation without investigation.
 
 ## Post-session and reset
 
@@ -839,14 +877,14 @@ The deck does not persist its own room state. Reloading the page clears:
 After the session:
 
 1. If you need a record of aggregate findings, copy them into separate facilitator notes before reloading. The canonical deck does not save them.
-2. Reload the page and confirm it returns to Slide 1 with `1 / 15`.
+2. Reload the page and confirm it returns to Slide 1 with `1 / 16`.
 3. Close external Long Story Short and image-tool tabs.
 4. Follow each external service's own history or deletion controls if anything was generated there; reloading this deck does not clear an external account's history.
 5. Do not preserve participant names, private prompts, generated images, or identifiable notes in the canonical folder.
 
 ## Concise rehearsal checklist
 
-- [ ] Open the correct canonical `index.html`; confirm `1 / 15`.
+- [ ] Open the correct canonical `index.html`; confirm `1 / 16`.
 - [ ] Confirm `corpus-data.js` loads with no startup error.
 - [ ] Test projector fit at 100% zoom and full screen.
 - [ ] Test the Long Story Short embed and direct-link fallback on the venue network.
@@ -862,6 +900,8 @@ After the session:
 - [ ] Practice setting the denominator before entering A/B observations on Slide 14.
 - [ ] Rehearse the three accuracy statements: corpus frequency is not truth, lookup is not an LLM, and the room tally does not isolate a cause.
 - [ ] Rehearse the participation and privacy language before laptops open.
+- [ ] Inspect optional Slide 16 for projector fit; rehearse its separate deck and Spring-class scopes, class midpoint and scenario span, de-identified aggregate inputs, national-scale and water-boundary caveats, and public-build safeguards.
+- [ ] Plan to stop at Slide 15 unless the room asks an authorship or environmental-cost question.
 - [ ] Decide in advance which examples to cut if time compresses.
 - [ ] Reload once at the end and confirm all interaction state clears.
 
@@ -876,3 +916,4 @@ When in doubt, keep these statements exact:
 - The image activity is exploratory. A changed prompt phrase, tool differences, settings, and randomness can all affect a result.
 - The tally describes this room's reported outputs. It does not establish why a pattern occurred.
 - The deck does not solicit or transmit participant submissions. A facilitator-entered perspective idea stays only in page memory and clears on reload; external sites have their own data practices.
+- Slide 16 is an optional afterword. Its estimates are modeled rather than metered. The workshop deck and Spring-class rows are separate scopes; the class midpoint combines modeled teacher preparation and student use from de-identified aggregate totals, and its wide span is a scenario envelope dominated by video mix and retries. National comparisons are scale references rather than matched footprints.

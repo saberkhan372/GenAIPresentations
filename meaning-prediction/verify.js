@@ -17,6 +17,7 @@ const vm = require('node:vm');
 const ROOT = __dirname;
 const INDEX_PATH = path.join(ROOT, 'index.html');
 const CORPUS_PATH = path.join(ROOT, 'corpus-data.js');
+const ACCOUNTING_PATH = path.join(ROOT, 'AI-accounting.md');
 const results = [];
 
 function assert(condition, message) {
@@ -247,13 +248,13 @@ check('corpus-data.js exists and is readable', () => {
   return `${Buffer.byteLength(corpusSource)} bytes`;
 });
 
-check('HTML has exactly 15 labeled slides', () => {
+check('HTML has exactly 16 labeled slides', () => {
   assert(html, 'index.html was not available for inspection.');
   const slides = extractSlides(html);
-  assert(slides.length === 15, `Expected 15 slides; found ${slides.length}.`);
+  assert(slides.length === 16, `Expected 16 slides; found ${slides.length}.`);
   const unlabeled = slides.map((slide, index) => slide.label ? '' : String(index + 1)).filter(Boolean);
   assert(!unlabeled.length, `Slides missing data-label/data-slide-label/data-screen-label/aria-label: ${unlabeled.join(', ')}`);
-  assert(new Set(slides.map((slide) => slide.label.trim().toLowerCase())).size === 15, 'Slide labels must be unique.');
+  assert(new Set(slides.map((slide) => slide.label.trim().toLowerCase())).size === 16, 'Slide labels must be unique.');
   return slides.map((slide) => slide.label).join(' · ');
 });
 
@@ -275,11 +276,12 @@ check('Slide labels cover the canonical lesson arc', () => {
     ['live A/B generation', /part three|a\s*\/?\s*b|generation/i],
     ['A/B comparison', /part three comparison|compare/i],
     ['room tally', /tally|tries.*counted/i],
-    ['close', /close|closing|reflection/i]
+    ['close', /close|closing|reflection/i],
+    ['AI accounting', /ai accounting|impact|afterword/i]
   ];
   const missing = required.filter(([, pattern]) => !pattern.test(labels)).map(([name]) => name);
   assert(!missing.length, `Missing canonical slide labels: ${missing.join(', ')}. Labels found: ${labels}`);
-  return 'all 15 semantic labels found';
+  return 'all 16 semantic labels found';
 });
 
 check('Room-facing revision contracts are visible', () => {
@@ -298,6 +300,56 @@ check('Room-facing revision contracts are visible', () => {
   return 'no visible timings, prompt-copy buttons, or Slide 2 warning; quiet fallback and final close present';
 });
 
+check('Optional AI-accounting afterword keeps uncertainty, scope, and safeguards visible', () => {
+  assert(html, 'index.html was not available for inspection.');
+  assert(fs.existsSync(ACCOUNTING_PATH), 'AI-accounting.md is missing beside the canonical deck.');
+  const afterwordSource = slideMarkupByLabel(html, 'AI accounting');
+  const afterword = visibleText(afterwordSource);
+  const accounting = readUtf8(ACCOUNTING_PATH);
+  for (const required of [
+    'Afterword · optional · estimated, not metered',
+    'This deck is also evidence.',
+    'Originality has two answers',
+    'Direction + judgment',
+    'Literal words + code',
+    '≈4 active hours',
+    'Modeled AI footprint',
+    'Two separate scopes. Scenario estimates—not provider telemetry.',
+    'This workshop deck',
+    '≈1 kWh · 0.35 kg CO₂e · 3–4 L',
+    'Spring Gen AI class',
+    '≈6 kWh · 2 kg CO₂e · 20 L',
+    'Teacher preparation + modeled student use',
+    'Class scenario span: 0.8–81 kWh · 0.3–28 kg · 3–280 L.',
+    'Video mix and retries dominate; this is not a confidence interval.',
+    'National averages per resident—not equivalent footprints.',
+    'U.S. 35 kWh/day · Bangladesh 1.7 kWh/day',
+    'U.S. 480 L/day · Bangladesh 58 L/day',
+    'AI consumption is a different metric.',
+    'U.S. 37 kg/day · Bangladesh 1.9 kg/day',
+    'The deck’s ≈0.35 kg equals about 14 U.S. minutes or 4½ Bangladesh hours.',
+    'Safeguards used',
+    'Only de-identified totals were used.',
+    'No student work, names, grades, rosters, prompts, or accounts were opened or published.',
+    'The deck stores no names, files, or images; reload clears room state.',
+    'External tools set their own privacy terms.',
+    'Modeled with ≥3× uncertainty.',
+    'Slide 15 remains the intended close.'
+  ]) {
+    assert(afterword.includes(required), `Slide 16 is missing its accounting/safeguard contract: ${required}`);
+  }
+  assert(/data-notes\s*=\s*["'][^"']*Slide 15 is the real close; stop there unless the room asks/i.test(afterwordSource), 'Slide 16 notes do not preserve Slide 15 as the normal close.');
+  assert(/data-notes\s*=\s*["'][^"']*Every environmental number is a scenario estimate, not provider telemetry/i.test(afterwordSource), 'Slide 16 notes do not state the estimation boundary.');
+  for (const required of ['98 document submissions', '171 submitted media files', 'video mix and retries dominate', 'No student work, names, grades, rosters, prompts, or accounts were opened or published']) {
+    assert(afterwordSource.includes(required), `Slide 16 notes are missing their de-identified class-scenario contract: ${required}`);
+  }
+  assert(/id\s*=\s*["']slide-counter["'][^>]*>\s*1\s*\/\s*16\s*</i.test(html), 'The persistent counter does not initialize as 1 / 16.');
+  for (const phrase of ['The rows are separate scopes', '98 document submissions', '171 submitted media files', 'Video generation and retries dominate', 'not measurements or confidence bounds', 'No underlying student work, names, grades, rosters, prompts, or accounts were opened', 'municipal water withdrawal', 'Privacy and publication safeguards']) {
+    assert(accounting.includes(phrase), `AI-accounting.md is missing a public-method caveat: ${phrase}`);
+  }
+  return 'optional afterword, separate deck/class scenarios, de-identified inputs, uncertainty, scale caveats, safeguards, and 1 / 16 counter found';
+});
+
 check('Three lesson parts share a visual grammar and retain distinct identities', () => {
   assert(html, 'index.html was not available for inspection.');
   const slides = extractSlides(html);
@@ -305,11 +357,11 @@ check('Three lesson parts share a visual grammar and retain distinct identities'
   [5, 6, 7].forEach((number) => assert(classes[number - 1].split(/\s+/).includes('part-one'), `Slide ${number} must use part-one.`));
   [8, 9, 10, 11].forEach((number) => assert(classes[number - 1].split(/\s+/).includes('part-two'), `Slide ${number} must use part-two.`));
   [12, 13, 14].forEach((number) => assert(classes[number - 1].split(/\s+/).includes('part-three'), `Slide ${number} must use part-three.`));
-  [1, 2, 3, 4, 15].forEach((number) => assert(!/\bpart-(?:one|two|three)\b/.test(classes[number - 1]), `Bookend Slide ${number} must retain the neutral style.`));
+  [1, 2, 3, 4, 15, 16].forEach((number) => assert(!/\bpart-(?:one|two|three)\b/.test(classes[number - 1]), `Bookend/afterword Slide ${number} must remain outside the three part treatments.`));
   assert(/\.part-one\s*\{[^}]*background-color[^}]*box-shadow/si.test(html), 'Part One shared background/rail styling is missing.');
   assert(/\.part-two[\s\S]{0,100}?\{[^}]*background-color[^}]*box-shadow/si.test(html), 'Part Two shared background/rail styling is missing.');
   assert(/\.part-three\s*\{[^}]*background-color[^}]*box-shadow/si.test(html), 'Part Three shared background/rail styling is missing.');
-  return 'Slides 5–7, 8–11, and 12–14 use three related part treatments; bookends remain neutral';
+  return 'Slides 5–7, 8–11, and 12–14 use three related part treatments; close and optional afterword remain outside them';
 });
 
 check('Required facilitator controls and ARIA hooks are present', () => {

@@ -8,13 +8,13 @@ The title **Meaning ↔ Prediction** names a reciprocal relationship. Context an
 
 ## Instructional sequence
 
-The 15-slide lesson has three related parts with a repeated layout and distinct color treatment:
+The 16-slide lesson has three related parts with a repeated layout and distinct color treatment:
 
 - **Meaning** uses lived and local context to show why the same words can support different interpretations.
 - **Prediction** moves from a visible counting pipeline to an interactive exact-match corpus game, then draws a careful boundary between that mechanism and a language model.
 - **Investigation** changes one phrase in an image prompt, compares the results, and separates visible shorthand from the relationship or activity an image cannot prove.
 
-Neutral opening and closing slides frame those three parts. Slide counts remain visible; projected time estimates do not.
+Neutral opening and closing slides frame those three parts. Slide 15 remains the lesson's intended close; Slide 16 is an optional transparency afterword. Slide counts remain visible; projected time estimates do not.
 
 ## Projection and visual system
 
@@ -90,6 +90,12 @@ The room-facing distinction is:
 4. That is why fluency still needs verification.
 
 The lesson does not claim that language models never reproduce source text, that every non-matching output is false, or that exact corpus frequencies reproduce model training or generation.
+
+## Optional AI accounting afterword
+
+Slide 16 turns the lesson's verification questions back onto the deck itself. It keeps two contribution lenses separate: human-led direction and judgment, and literal words/code. It also shows modeled energy, carbon, and water scenarios for this workshop deck and the Spring Gen AI class. These are retrospective estimates, not provider telemetry.
+
+The deck and class are separate scopes. The class midpoint models teacher preparation and student use from de-identified aggregate totals; its 0.8–81 kWh envelope is a scenario range, not a confidence interval, because video mix and retries are unknown. U.S. and Bangladesh figures are national per-resident scale references, not claims about where computation ran or equivalent environmental footprints. The water comparison is volume-only because AI operational consumption and municipal withdrawal use different accounting boundaries. Full method and sources are in [`AI-accounting.md`](./AI-accounting.md).
 
 ## Privacy and reliability boundaries
 

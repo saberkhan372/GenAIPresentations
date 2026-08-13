@@ -6,11 +6,12 @@ Interactive, facilitator-led presentations about generative AI. The published si
 
 ### Meaning ↔ Prediction
 
-A 15-slide workshop that moves between human meaning-making, a transparent corpus-counting activity, and a small A/B image-generation investigation.
+A 16-slide workshop that moves between human meaning-making, a transparent corpus-counting activity, and a small A/B image-generation investigation. Slide 16 is an optional, explicitly modeled transparency afterword; Slide 15 remains the lesson's intended close.
 
 - [Open the presentation](./meaning-prediction/)
 - [Read the facilitator guide](./meaning-prediction/facilitator-guide.md)
 - [Read the development notes](./meaning-prediction/development-notes.md)
+- [Read the AI accounting method](./meaning-prediction/AI-accounting.md)
 - [Review source and service notices](./meaning-prediction/NOTICE.md)
 
 ## Site structure
@@ -23,6 +24,7 @@ A 15-slide workshop that moves between human meaning-making, a transparent corpu
 │   ├── corpus-data.js                 # Local Founding & Rights corpus
 │   ├── facilitator-guide.md           # Teaching directions and contingencies
 │   ├── development-notes.md           # Public design and implementation record
+│   ├── AI-accounting.md                # Modeled AI contribution and footprint method
 │   ├── verify.js                       # Deterministic source and corpus checks
 │   ├── README.md                      # Presentation overview
 │   └── NOTICE.md                      # Sources and external-service boundaries

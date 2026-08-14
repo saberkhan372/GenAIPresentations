@@ -6,7 +6,7 @@ Interactive, facilitator-led presentations about generative AI. The published si
 
 ### Meaning ↔ Prediction
 
-A 16-slide workshop that moves between human meaning-making, a transparent corpus-counting activity, and a small A/B image-generation investigation. Slide 16 is an optional, explicitly modeled transparency afterword; Slide 15 remains the lesson's intended close.
+A 17-slide workshop that moves between human meaning-making, a transparent corpus-counting activity, and a small A/B image-generation investigation. Slide 15 is the pedagogical close, Slide 16 offers optional feedback, and Slide 17 is an optional, explicitly modeled transparency afterword and the deck's literal ending.
 
 - [Open the presentation](./meaning-prediction/)
 - [Read the facilitator guide](./meaning-prediction/facilitator-guide.md)
@@ -37,7 +37,7 @@ From `meaning-prediction/`, run `node verify.js` for deterministic source, synta
 
 ## Privacy
 
-The lesson code has no analytics, backend, account system, or browser storage. Its interactive state stays in memory and clears on reload. Embedded or linked external services have their own terms and data practices; the facilitator guide describes those boundaries.
+The lesson code has no analytics, backend, account system, or browser storage. Its interactive state stays in memory and clears on reload. Optional Slide 16 feedback goes directly to Google Forms only after a viewer submits it; the deck retains no copy. Embedded or linked external services have their own terms and data practices; the facilitator guide describes those boundaries.
 
 ## License
 

@@ -18,6 +18,9 @@ const ROOT = __dirname;
 const INDEX_PATH = path.join(ROOT, 'index.html');
 const CORPUS_PATH = path.join(ROOT, 'corpus-data.js');
 const ACCOUNTING_PATH = path.join(ROOT, 'AI-accounting.md');
+const README_PATH = path.join(ROOT, 'README.md');
+const DEVELOPMENT_PATH = path.join(ROOT, 'development-notes.md');
+const FACILITATOR_PATH = path.join(ROOT, 'facilitator-guide.md');
 const results = [];
 
 function assert(condition, message) {
@@ -248,13 +251,13 @@ check('corpus-data.js exists and is readable', () => {
   return `${Buffer.byteLength(corpusSource)} bytes`;
 });
 
-check('HTML has exactly 16 labeled slides', () => {
+check('HTML has exactly 17 labeled slides', () => {
   assert(html, 'index.html was not available for inspection.');
   const slides = extractSlides(html);
-  assert(slides.length === 16, `Expected 16 slides; found ${slides.length}.`);
+  assert(slides.length === 17, `Expected 17 slides; found ${slides.length}.`);
   const unlabeled = slides.map((slide, index) => slide.label ? '' : String(index + 1)).filter(Boolean);
   assert(!unlabeled.length, `Slides missing data-label/data-slide-label/data-screen-label/aria-label: ${unlabeled.join(', ')}`);
-  assert(new Set(slides.map((slide) => slide.label.trim().toLowerCase())).size === 16, 'Slide labels must be unique.');
+  assert(new Set(slides.map((slide) => slide.label.trim().toLowerCase())).size === 17, 'Slide labels must be unique.');
   return slides.map((slide) => slide.label).join(' · ');
 });
 
@@ -275,13 +278,14 @@ check('Slide labels cover the canonical lesson arc', () => {
     ['interactive output labeling', /annotat|output label|prompt and output comparison/i],
     ['live A/B generation', /part three|a\s*\/?\s*b|generation/i],
     ['A/B comparison', /part three comparison|compare/i],
-    ['room tally', /tally|tries.*counted/i],
+    ['word-to-outcome test', /word[- ]to[- ]outcome|word.*control|prompt.*test/i],
     ['close', /close|closing|reflection/i],
+    ['optional feedback', /feedback/i],
     ['AI accounting', /ai accounting|impact|afterword/i]
   ];
   const missing = required.filter(([, pattern]) => !pattern.test(labels)).map(([name]) => name);
   assert(!missing.length, `Missing canonical slide labels: ${missing.join(', ')}. Labels found: ${labels}`);
-  return 'all 16 semantic labels found';
+  return 'all 17 semantic labels found';
 });
 
 check('Room-facing revision contracts are visible', () => {
@@ -300,54 +304,214 @@ check('Room-facing revision contracts are visible', () => {
   return 'no visible timings, prompt-copy buttons, or Slide 2 warning; quiet fallback and final close present';
 });
 
-check('Optional AI-accounting afterword keeps uncertainty, scope, and safeguards visible', () => {
+check('Final AI-accounting slide uses truthful comparisons, uncertainty, and safeguards', () => {
   assert(html, 'index.html was not available for inspection.');
   assert(fs.existsSync(ACCOUNTING_PATH), 'AI-accounting.md is missing beside the canonical deck.');
   const afterwordSource = slideMarkupByLabel(html, 'AI accounting');
   const afterword = visibleText(afterwordSource);
+  const scriptSource = extractScripts(html).map((script) => script.inline).join('\n');
   const accounting = readUtf8(ACCOUNTING_PATH);
   for (const required of [
-    'Afterword · optional · estimated, not metered',
+    'Final transparency note · estimated, not metered',
     'This deck is also evidence.',
-    'Originality has two answers',
+    'Who made it? Two lenses.',
     'Direction + judgment',
     'Literal words + code',
+    'Saber 65–75%',
+    'Codex 15–25%',
+    'Claude 8–15%',
+    'Saber 5–10%',
+    'Codex 50–60%',
+    'Claude 35–45%',
     '≈4 active hours',
-    'Modeled AI footprint',
-    'Two separate scopes. Scenario estimates—not provider telemetry.',
-    'This workshop deck',
-    '≈1 kWh · 0.35 kg CO₂e · 3–4 L',
-    'Spring Gen AI class',
-    '≈6 kWh · 2 kg CO₂e · 20 L',
-    'Teacher preparation + modeled student use',
-    'Class scenario span: 0.8–81 kWh · 0.3–28 kg · 3–280 L.',
-    'Video mix and retries dominate; this is not a confidence interval.',
-    'National averages per resident—not equivalent footprints.',
-    'U.S. 35 kWh/day · Bangladesh 1.7 kWh/day',
-    'U.S. 480 L/day · Bangladesh 58 L/day',
-    'AI consumption is a different metric.',
-    'U.S. 37 kg/day · Bangladesh 1.9 kg/day',
-    'The deck’s ≈0.35 kg equals about 14 U.S. minutes or 4½ Bangladesh hours.',
+    'What did it cost?',
+    'Each tab resets the circle scale; modeled values stay labeled.',
+    'Energy',
+    'CO₂',
+    'Water',
+    'Modeled project scopes',
+    'National averages · per resident · 6h',
+    'This deck',
+    '≈1 kWh',
+    '≈6h build window',
+    'Spring class',
+    '≈6 kWh',
+    'course scenario',
+    'U.S. resident',
+    '≈8.8 kWh',
+    'Bangladesh resident',
+    '≈0.41 kWh',
+    'AI scenario ranges',
+    'Deck 0.3–3 kWh',
+    'Class 0.8–81 kWh',
+    'Scale only.',
+    'Six hours matches the deck build, not the class duration.',
+    'Scale anchor',
+    'largest in this view',
     'Safeguards used',
-    'Only de-identified totals were used.',
+    'Transparency should expose the method—not the people behind the data.',
+    'Aggregate only',
+    'The estimate needs activity counts—not identities or content.',
+    'Only de-identified totals informed the class scenario.',
     'No student work, names, grades, rosters, prompts, or accounts were opened or published.',
-    'The deck stores no names, files, or images; reload clears room state.',
-    'External tools set their own privacy terms.',
-    'Modeled with ≥3× uncertainty.',
-    'Slide 15 remains the intended close.'
+    'Ephemeral room',
+    'Room entries stay in this page and clear on reload, so participation does not become a retained record.',
+    'Submit by choice',
+    'Slide 16 sends only feedback a viewer chooses to submit, directly to Google Forms; the deck keeps no copy.',
+    'Modeled with ≥3× uncertainty;',
+    'Circle areas compare amounts only inside the selected metric.',
+    'Separate scopes—do not add.'
   ]) {
-    assert(afterword.includes(required), `Slide 16 is missing its accounting/safeguard contract: ${required}`);
+    assert(afterword.includes(required), `Slide 17 is missing its accounting/safeguard contract: ${required}`);
   }
-  assert(/data-notes\s*=\s*["'][^"']*Slide 15 is the real close; stop there unless the room asks/i.test(afterwordSource), 'Slide 16 notes do not preserve Slide 15 as the normal close.');
-  assert(/data-notes\s*=\s*["'][^"']*Every environmental number is a scenario estimate, not provider telemetry/i.test(afterwordSource), 'Slide 16 notes do not state the estimation boundary.');
-  for (const required of ['98 document submissions', '171 submitted media files', 'video mix and retries dominate', 'No student work, names, grades, rosters, prompts, or accounts were opened or published']) {
-    assert(afterwordSource.includes(required), `Slide 16 notes are missing their de-identified class-scenario contract: ${required}`);
+  const slideLabels = extractSlides(html).map((slide) => slide.label);
+  assert(slideLabels[15] === 'Optional feedback' && slideLabels[16] === 'AI accounting', `Slides 16–17 must end Feedback → AI accounting; found ${slideLabels.slice(15).join(' → ')}.`);
+  assert(/aria-labelledby\s*=\s*["']slide-17-title["']/i.test(afterwordSource) && /id\s*=\s*["']slide-17-title["']/i.test(afterwordSource), 'The final accounting slide must use the Slide 17 heading contract.');
+  assert(/data-notes\s*=\s*["'][^"']*the deck ends here by accounting for its own authorship/i.test(afterwordSource), 'Slide 17 notes do not establish the requested final transparency coda.');
+  assert(/data-notes\s*=\s*["'][^"']*Every environmental number is a scenario estimate, not provider telemetry/i.test(afterwordSource), 'Slide 17 notes do not state the estimation boundary.');
+  for (const required of ['98 document submissions', '171 submitted media files', 'No student work, names, grades, rosters, prompts, or accounts were opened or published']) {
+    assert(afterwordSource.includes(required), `Slide 17 notes are missing their de-identified class-scenario contract: ${required}`);
   }
-  assert(/id\s*=\s*["']slide-counter["'][^>]*>\s*1\s*\/\s*16\s*</i.test(html), 'The persistent counter does not initialize as 1 / 16.');
+  assert((afterwordSource.match(/class\s*=\s*["'][^"']*\bcontribution-plot\b/gi) || []).length === 2, 'Slide 17 must contain two contribution range plots.');
+  assert((afterwordSource.match(/class\s*=\s*["'][^"']*\bcontribution-row\b/gi) || []).length === 6, 'Slide 17 must contain six labeled contribution ranges.');
+  assert(/role\s*=\s*["']tablist["']/i.test(afterwordSource), 'Slide 17 must expose the resource selector as a tablist.');
+  assert((afterwordSource.match(/class\s*=\s*["'][^"']*\bimpact-metric-tab\b/gi) || []).length === 3, 'Slide 17 must contain exactly three resource tabs.');
+  for (const metricId of ['energy', 'carbon', 'water']) {
+    assert(new RegExp(`data-impact-metric\\s*=\\s*["']${metricId}["']`, 'i').test(afterwordSource), `Slide 17 is missing the ${metricId} tab.`);
+  }
+  assert(/id\s*=\s*["']impact-tab-energy["'][^>]*aria-selected\s*=\s*["']true["'][^>]*tabindex\s*=\s*["']0["']/i.test(afterwordSource), 'Energy must be the accessible default metric tab.');
+  assert(/id\s*=\s*["']impact-metric-panel["'][^>]*role\s*=\s*["']tabpanel["']/i.test(afterwordSource), 'The metric view must be an accessible tabpanel.');
+  assert(/id\s*=\s*["']impact-metric-status["'][^>]*role\s*=\s*["']status["'][^>]*aria-live\s*=\s*["']polite["']/i.test(afterwordSource), 'The changing metric must have a polite live status.');
+  assert((afterwordSource.match(/data-impact-entity\s*=\s*["'](?:deck|class|us|bangladesh)["']/gi) || []).length === 4, 'Slide 17 must contain four comparison entities.');
+  assert((afterwordSource.match(/class\s*=\s*["'][^"']*\bmetric-circle-note\b/gi) || []).length === 4, 'Every Slide 17 circle must carry the reusable scale-anchor cue.');
+  assert(/class\s*=\s*["'][^"']*\bmetric-entity\b[^"']*\bis-scale-anchor\b[^"']*["'][^>]*data-impact-entity\s*=\s*["']us["']/i.test(afterwordSource), 'The initial Energy view must mark the U.S. circle as its scale anchor.');
+  for (const value of ['≈1 kWh', '≈6 kWh', '≈8.8 kWh', '≈0.41 kWh', '≈0.35 kg CO₂e', '≈2 kg CO₂e', '≈9.3 kg CO₂', '≈0.48 kg CO₂', '≈3.5 L', '≈20 L', '≈120 L', '≈14.5 L']) {
+    assert(scriptSource.includes(value), `Slide 17 metric data is missing ${value}.`);
+  }
+  for (const range of ['0.3–3 kWh', '0.8–81 kWh', '0.04–2.1 kg CO₂e', '0.3–28 kg CO₂e', '0.1–12 L', '3–280 L']) {
+    assert(scriptSource.includes(range), `Slide 17 metric data is missing scenario range ${range}.`);
+  }
+  for (const boundary of ['economy-wide per resident', 'territorial CO₂ excluding land-use change', 'municipal withdrawal', 'volume-only comparison', 'not the class duration']) {
+    assert(scriptSource.includes(boundary) || afterwordSource.includes(boundary), `Slide 17 is missing metric boundary copy: ${boundary}`);
+  }
+  assert(/impactMaxDiameter\s*=\s*280/.test(scriptSource) && /Math\.sqrt\(item\.value\s*\/\s*maxValue\)/.test(scriptSource), 'Slide 17 must scale circle diameter by the square root of the active value so area carries amount.');
+  assert(/const\s+isScaleAnchor\s*=\s*item\.value\s*===\s*maxValue/.test(scriptSource) && /classList\.toggle\(\s*["']is-scale-anchor["']\s*,\s*isScaleAnchor\s*\)/.test(scriptSource), 'Slide 17 must recompute and visibly mark the active view scale anchor.');
+  assert(/Scale reset: the largest value is marked as this view's scale anchor/.test(scriptSource), 'The metric live status must announce that the circle scale reset.');
+  assert(/--diameter:231\.2px/.test(afterwordSource) && !/--diameter:231\.3px/.test(afterwordSource), 'The pre-JavaScript Energy/Class diameter must match the one-decimal square-root result.');
+  assert(/water\s*:\s*\{[\s\S]*?deck\s*:\s*\{\s*value\s*:\s*3\.5\s*,\s*display\s*:\s*["']≈3\.5 L["']/i.test(scriptSource), 'The water circle must use the exact displayed 3.5 L central estimate as its area basis.');
+  for (const key of ['ArrowLeft', 'ArrowRight', 'Home', 'End']) assert(scriptSource.includes(key), `Metric-tab keyboard handling is missing ${key}.`);
+  assert(/id\s*=\s*["']slide-counter["'][^>]*>\s*1\s*\/\s*17\s*</i.test(html), 'The persistent counter does not initialize as 1 / 17.');
   for (const phrase of ['The rows are separate scopes', '98 document submissions', '171 submitted media files', 'Video generation and retries dominate', 'not measurements or confidence bounds', 'No underlying student work, names, grades, rosters, prompts, or accounts were opened', 'municipal water withdrawal', 'Privacy and publication safeguards']) {
     assert(accounting.includes(phrase), `AI-accounting.md is missing a public-method caveat: ${phrase}`);
   }
-  return 'optional afterword, separate deck/class scenarios, de-identified inputs, uncertainty, scale caveats, safeguards, and 1 / 16 counter found';
+  return 'final Slide 17 order, three accessible metric tabs, four area-scaled comparisons per metric, all central values and scenario ranges, six-hour boundary caveats, safeguards, method note, and 1 / 17 counter found';
+});
+
+check('Optional feedback form has the exact bounded Google Forms contract', () => {
+  assert(html, 'index.html was not available for inspection.');
+  const feedbackSource = slideMarkupByLabel(html, 'Optional feedback');
+  const feedbackText = visibleText(feedbackSource);
+  const source = extractScripts(html).map((script) => script.inline).join('\n');
+  const formId = '1FAIpQLSdXNyHh3KbdUFiPVrQbBiluReq3eOqob2EYnNiCPY1fzZ5VtA';
+  const responseEndpoint = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+  const responderUrl = `https://docs.google.com/forms/d/e/${formId}/viewform`;
+
+  assert(/data-label\s*=\s*["']Optional feedback["']/i.test(feedbackSource), 'Slide 16 must use the Optional feedback label.');
+  assert(/aria-labelledby\s*=\s*["']slide-16-title["']/i.test(feedbackSource) && /id\s*=\s*["']slide-16-title["']/i.test(feedbackSource), 'The feedback slide must use the Slide 16 heading contract.');
+  assert(/<form\b(?=[^>]*id\s*=\s*["']feedback-form["'])(?=[^>]*method\s*=\s*["']POST["'])(?=[^>]*target\s*=\s*["']feedback-transport["'])[^>]*>/i.test(feedbackSource), 'Slide 16 form must POST through the named hidden transport.');
+  const actionMatch = /<form\b[^>]*\baction\s*=\s*["']([^"']+)["']/i.exec(feedbackSource);
+  assert(actionMatch && actionMatch[1] === responseEndpoint, `Feedback endpoint must be exactly ${responseEndpoint}.`);
+
+  const namedEntries = [...feedbackSource.matchAll(/\bname\s*=\s*["'](entry\.[^"']+)["']/gi)].map((match) => match[1]);
+  const baseEntryIds = [...new Set(namedEntries.filter((name) => !name.endsWith('.other_option_response')))];
+  assert(JSON.stringify(baseEntryIds.sort()) === JSON.stringify(['entry.1213006992', 'entry.1340179096', 'entry.2005527095'].sort()), `Feedback must use exactly the three expected entry IDs; found ${baseEntryIds.join(', ')}.`);
+  assert(namedEntries.filter((name) => name === 'entry.2005527095.other_option_response').length === 1, 'Q2 Other must use the matching Google Forms other_option_response field exactly once.');
+  assert(namedEntries.every((name) => ['entry.1213006992', 'entry.1340179096', 'entry.2005527095', 'entry.2005527095.other_option_response'].includes(name)), `Unexpected Google Forms entry field found: ${namedEntries.join(', ')}.`);
+
+  const questions = [...feedbackSource.matchAll(/<div\b[^>]*class\s*=\s*["'][^"']*\bfeedback-question\b[^"']*["'][^>]*>/gi)];
+  assert(questions.length === 3, `Slide 16 must contain exactly three feedback questions; found ${questions.length}.`);
+  for (const number of ['1', '2', '3']) {
+    const matches = feedbackSource.match(new RegExp(`<span\\b[^>]*class\\s*=\\s*["'][^"']*\\bfeedback-question-number\\b[^"']*["'][^>]*>\\s*${number}\\s*</span`, 'gi')) || [];
+    assert(matches.length === 1, `Feedback question number ${number} must appear exactly once; found ${matches.length}.`);
+  }
+  for (const question of ['What idea from this lesson will you carry forward?', 'Which question feels most useful to carry into future AI use?', 'What should be clearer, shorter, or explored next—if anything?']) {
+    assert(feedbackText.includes(question), `Slide 16 is missing exact Google Form question title: ${question}`);
+  }
+  assert(feedbackText.includes('Three quick questions. Answer here, open the direct form, or skip this slide.'), 'Slide 16 is missing the flattened-layout participation choice copy.');
+  const questionOrder = ['feedback-question--carry', 'feedback-question--useful', 'feedback-question--improve'].map((className) => feedbackSource.indexOf(className));
+  assert(questionOrder.every((index) => index >= 0) && questionOrder[0] < questionOrder[1] && questionOrder[1] < questionOrder[2], 'Slide 16 question DOM order must remain carry → useful → improve.');
+  assert(/\.feedback-grid\s*\{[^}]*grid-template-areas\s*:\s*["']carry useful["']\s*["']improve improve["']/si.test(html), 'Slide 16 must keep Q1/Q2 on the first row and the open response spanning the second row.');
+  const arcChoices = [...feedbackSource.matchAll(/<div\b([^>]*class\s*=\s*["'][^"']*\bfeedback-choice--arc\b[^"']*["'][^>]*)>([\s\S]*?)<\/div\s*>/gi)];
+  assert(arcChoices.length === 3, `Slide 16 must contain exactly three lesson-arc choices; found ${arcChoices.length}.`);
+  const expectedArcChoices = [
+    ['feedback-choice--meaning', 'Part One · Meaning', 'Slides 5–7', 'What context is missing?'],
+    ['feedback-choice--prediction', 'Part Two · Prediction', 'Slides 8–11', 'What did the system add?'],
+    ['feedback-choice--investigation', 'Part Three · Investigation', 'Slides 12–14', 'What should I verify or test?']
+  ];
+  arcChoices.forEach((match, index) => {
+    const [expectedClass, expectedPart, expectedRange, expectedQuestion] = expectedArcChoices[index];
+    const choiceText = visibleText(match[2]);
+    assert(new RegExp(`\\b${expectedClass}\\b`).test(match[1]), `Lesson-arc choice ${index + 1} must use ${expectedClass}.`);
+    assert(choiceText.includes(expectedPart), `Lesson-arc choice ${index + 1} is missing ${expectedPart}.`);
+    assert(choiceText.includes(expectedRange), `Lesson-arc choice ${index + 1} is missing ${expectedRange}.`);
+    assert(choiceText.includes(expectedQuestion), `Lesson-arc choice ${index + 1} is missing ${expectedQuestion}.`);
+  });
+  assert(/<button\b(?=[^>]*id\s*=\s*["']feedback-accounting-route["'])(?=[^>]*class\s*=\s*["'][^"']*\bfeedback-accounting-route\b)(?=[^>]*type\s*=\s*["']button["'])(?=[^>]*aria-label\s*=\s*["']Open Slide 17, This deck is also evidence["'])[^>]*>/i.test(feedbackSource), 'Slide 16 accounting route must be one accessible non-submitting button.');
+  const afterwordSource = slideMarkupByLabel(html, 'AI accounting');
+  assert(/<h2\b(?=[^>]*id\s*=\s*["']slide-17-title["'])(?=[^>]*tabindex\s*=\s*["']-1["'])[^>]*>/i.test(afterwordSource), 'The Slide 17 title must be programmatically focusable after the optional route.');
+  assert(/feedbackAccountingRoute\.addEventListener\(\s*["']click["'][\s\S]{0,220}showSlide\(\s*16\s*\)[\s\S]{0,220}getElementById\(\s*["']slide-17-title["']\s*\)\.focus\(\s*\{\s*preventScroll\s*:\s*true\s*\}\s*\)/.test(source), 'The optional accounting route must open zero-based Slide 17 and move focus to its title.');
+  assert(/<input\b(?=[^>]*id\s*=\s*["']feedback-carry["'])(?=[^>]*name\s*=\s*["']entry\.1340179096["'])(?=[^>]*\brequired\b)[^>]*>/i.test(feedbackSource), 'Q1 must use entry.1340179096 and be required.');
+  assert(/<input\b(?=[^>]*id\s*=\s*["']feedback-useful-context["'])(?=[^>]*name\s*=\s*["']entry\.2005527095["'])(?=[^>]*\brequired\b)[^>]*>/i.test(feedbackSource), 'Q2 radio group must use entry.2005527095 and be required.');
+  assert(/<textarea\b(?=[^>]*id\s*=\s*["']feedback-improve["'])(?=[^>]*name\s*=\s*["']entry\.1213006992["'])(?![^>]*\brequired\b)[^>]*>/i.test(feedbackSource), 'Q3 must use entry.1213006992 and remain optional.');
+
+  for (const value of ['What context is missing?', 'What did the system add?', 'What should I verify or test?', 'I’m still deciding']) {
+    const escapedValue = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    assert(new RegExp(`<input\\b(?=[^>]*name\\s*=\\s*["']entry\\.2005527095["'])(?=[^>]*value\\s*=\\s*["']${escapedValue}["'])[^>]*>`, 'i').test(feedbackSource), `Q2 is missing option: ${value}.`);
+  }
+  assert(/<input\b(?=[^>]*id\s*=\s*["']feedback-useful-other["'])(?=[^>]*name\s*=\s*["']entry\.2005527095["'])(?=[^>]*value\s*=\s*["']__other_option__["'])[^>]*>/i.test(feedbackSource), 'Q2 Other must use Google Forms __other_option__.');
+  assert(/feedbackOtherText\.required\s*=\s*feedbackOther\.checked/.test(source), 'Q2 Other write-in must become required only when Other is selected.');
+  assert(/if\s*\(feedbackOtherText\.value\.trim\(\)\)\s*feedbackOther\.checked\s*=\s*true/.test(source), 'Typing an Other write-in must select the Other radio.');
+  assert(/feedbackOther\.checked\s*&&\s*!feedbackOtherText\.value\.trim\(\)[\s\S]{0,500}event\.preventDefault\(\)/.test(source), 'An empty selected Other write-in must prevent submission.');
+
+  const feedbackIframes = [...feedbackSource.matchAll(/<iframe\b([^>]*)>/gi)];
+  assert(feedbackIframes.length === 1, `Slide 16 must contain only one transport iframe; found ${feedbackIframes.length}.`);
+  const transportAttributes = feedbackIframes[0][1];
+  assert(/\bid\s*=\s*["']feedback-transport["']/i.test(transportAttributes) && /\bname\s*=\s*["']feedback-transport["']/i.test(transportAttributes) && /(?:^|\s)hidden(?:\s|=|$)/i.test(transportAttributes), 'Feedback transport iframe must be named and hidden.');
+  assert(!/\bsrc\s*=/i.test(transportAttributes), 'The hidden transport must not visibly embed or preload Google Forms.');
+  assert(!/<iframe\b[^>]*\bsrc\s*=\s*["'][^"']*docs\.google\.com\/forms/i.test(feedbackSource), 'A visible Google Form iframe/embed is forbidden.');
+  const fallbackMatch = /<a\b(?=[^>]*class\s*=\s*["'][^"']*\bfeedback-fallback\b)(?=[^>]*target\s*=\s*["']_blank["'])(?=[^>]*rel\s*=\s*["']noopener noreferrer["'])[^>]*href\s*=\s*["']([^"']+)["'][^>]*>/i.exec(feedbackSource);
+  assert(fallbackMatch && fallbackMatch[1] === responderUrl, `Direct responder fallback must be exactly ${responderUrl}.`);
+
+  assert(/id\s*=\s*["']feedback-status["'][^>]*role\s*=\s*["']status["'][^>]*aria-live\s*=\s*["']polite["']/i.test(feedbackSource), 'Feedback status must be a polite ARIA status region.');
+  assert(/aria-describedby\s*=\s*["']feedback-privacy feedback-status["']/i.test(feedbackSource), 'The feedback form must reference both privacy and status copy.');
+  assert(/feedbackForm\.setAttribute\(\s*["']aria-busy["']\s*,\s*["']true["']\s*\)/.test(source) && /feedbackForm\.setAttribute\(\s*["']aria-busy["']\s*,\s*["']false["']\s*\)/.test(source), 'Feedback submission state must expose aria-busy.');
+  assert(/feedbackForm\.addEventListener\(\s*["']keydown["'][\s\S]{0,220}event\.target\.matches\(\s*["']input, textarea["']\s*\)[\s\S]{0,100}event\.stopPropagation\(\)/.test(source), 'Typing in feedback fields must not trigger deck navigation shortcuts.');
+  assert(/feedbackTransport\.addEventListener\(\s*["']load["'][\s\S]{0,600}cannot independently verify how Google recorded it/i.test(source), 'Transport load status must avoid claiming independently verified recording.');
+  assert(/No confirmation returned[\s\S]{0,180}may or may not have been recorded[\s\S]{0,120}Open direct form/i.test(source), 'Submission timeout must provide an uncertainty-aware direct-form fallback.');
+
+  assert(/Nothing is sent until you choose Send feedback\./.test(feedbackText), 'Slide 16 must state that nothing is sent before submit.');
+  assert(/No name or email is requested\./.test(feedbackText), 'Slide 16 must state that it requests no name or email.');
+  assert(/Responses go to Google Forms only when you press Send; Google applies its own privacy terms\./.test(feedbackText), 'Slide 16 must disclose its submit-only Google Forms transfer and Google privacy boundary.');
+  assert(/Please do not include private, student, personnel, or school information\./.test(feedbackText), 'Slide 16 must warn against private, student, personnel, and school information.');
+  assert(!/<input\b[^>]*type\s*=\s*["']email["']/i.test(feedbackSource), 'Slide 16 must not contain an email field.');
+  assert(!/\bname\s*=\s*["'][^"']*(?:name|email)[^"']*["']/i.test(feedbackSource), 'Slide 16 must not submit a named name/email field.');
+  return 'exact Google endpoint/form ID, question titles, values, and entries; three ordered lesson-arc choices; non-submitting accessible Slide 17 route; required/optional and Other contracts; hidden transport; direct fallback; privacy/ARIA/status; keyboard guard; and no name/email fields found';
+});
+
+check('Public companion materials preserve the Slide 16 feedback → Slide 17 evidence order', () => {
+  const orderedPairs = [
+    [README_PATH, 'Slide 16 is optional feedback', 'Slide 17 is optional transparency'],
+    [DEVELOPMENT_PATH, '## Optional feedback', '## Optional AI accounting afterword'],
+    [FACILITATOR_PATH, '### Slide 16 — What should travel forward?', '### Slide 17 — This deck is also evidence.']
+  ];
+  for (const [filePath, feedbackMarker, evidenceMarker] of orderedPairs) {
+    assert(fs.existsSync(filePath), `Missing public companion file: ${path.basename(filePath)}.`);
+    const source = readUtf8(filePath);
+    const feedbackIndex = source.indexOf(feedbackMarker);
+    const evidenceIndex = source.indexOf(evidenceMarker);
+    assert(feedbackIndex >= 0 && evidenceIndex > feedbackIndex, `${path.basename(filePath)} does not preserve Slide 16 feedback before Slide 17 evidence.`);
+  }
+  return 'public README, development record, and facilitator guide all end feedback → evidence';
 });
 
 check('Three lesson parts share a visual grammar and retain distinct identities', () => {
@@ -357,11 +521,11 @@ check('Three lesson parts share a visual grammar and retain distinct identities'
   [5, 6, 7].forEach((number) => assert(classes[number - 1].split(/\s+/).includes('part-one'), `Slide ${number} must use part-one.`));
   [8, 9, 10, 11].forEach((number) => assert(classes[number - 1].split(/\s+/).includes('part-two'), `Slide ${number} must use part-two.`));
   [12, 13, 14].forEach((number) => assert(classes[number - 1].split(/\s+/).includes('part-three'), `Slide ${number} must use part-three.`));
-  [1, 2, 3, 4, 15, 16].forEach((number) => assert(!/\bpart-(?:one|two|three)\b/.test(classes[number - 1]), `Bookend/afterword Slide ${number} must remain outside the three part treatments.`));
+  [1, 2, 3, 4, 15, 16, 17].forEach((number) => assert(!/\bpart-(?:one|two|three)\b/.test(classes[number - 1]), `Bookend/optional Slide ${number} must remain outside the three part treatments.`));
   assert(/\.part-one\s*\{[^}]*background-color[^}]*box-shadow/si.test(html), 'Part One shared background/rail styling is missing.');
   assert(/\.part-two[\s\S]{0,100}?\{[^}]*background-color[^}]*box-shadow/si.test(html), 'Part Two shared background/rail styling is missing.');
   assert(/\.part-three\s*\{[^}]*background-color[^}]*box-shadow/si.test(html), 'Part Three shared background/rail styling is missing.');
-  return 'Slides 5–7, 8–11, and 12–14 use three related part treatments; close and optional afterword remain outside them';
+  return 'Slides 5–7, 8–11, and 12–14 use three related part treatments; close and optional slides remain outside them';
 });
 
 check('Required facilitator controls and ARIA hooks are present', () => {
@@ -377,7 +541,9 @@ check('Required facilitator controls and ARIA hooks are present', () => {
     ['prediction live region', /<[^>]+(?=[^>]*(?:prediction|distribution|candidates))(?=[^>]*aria-live\s*=)[^>]*>/i],
     ['interactive annotation palette', /<button\b(?=[^>]*data-label-tool)(?=[^>]*aria-pressed\s*=)[^>]*>/i],
     ['prompt-set pressed state', /<button\b(?=[^>]*data-prompt-set)(?=[^>]*aria-pressed\s*=)[^>]*>/i],
-    ['labeled tally adjustment', /<button\b[^>]*aria-label\s*=\s*["'][^"']*(?:increase|decrease|add|subtract)[^"']*(?:tally|count|pairs?|images?)[^"']*["']/i]
+    ['labeled word-test edit field', /<label\b[^>]*for\s*=\s*["']word-edit-phrase["'][^>]*>/i],
+    ['labeled word-test outcome fields', /<label\b[^>]*for\s*=\s*["']word-repeat-outcome["'][^>]*>[\s\S]*?<label\b[^>]*for\s*=\s*["']word-edit-outcome["'][^>]*>[\s\S]*?<label\b[^>]*for\s*=\s*["']word-return-outcome["'][^>]*>/i],
+    ['word-test polite status', /id\s*=\s*["']word-test-status["'][^>]*role\s*=\s*["']status["'][^>]*aria-live\s*=\s*["']polite["']/i]
   ];
   const missing = requirements.filter(([, pattern]) => !pattern.test(source)).map(([name]) => name);
   assert(!missing.length, `Missing controls/ARIA contracts: ${missing.join(', ')}`);
@@ -429,7 +595,8 @@ check('Rebuilt interaction state transitions are wired in source', () => {
     ['new prediction start', /predictionSeed\s*=\s*null/],
     ['interactive annotation state', /annotations\s*:\s*\{/],
     ['prompt-set state', /promptSet\s*:\s*["']leader["']/],
-    ['zero-denominator tally guard', /if\s*\(\s*!state\.pairs\s*\)/]
+    ['word-test state', /promptTest\s*:\s*\{[\s\S]{0,220}controlSide\s*:\s*["']b["'][\s\S]{0,220}observations\s*:\s*\{\s*repeat\s*:\s*["']["']\s*,\s*edit\s*:\s*["']["']\s*,\s*return\s*:\s*["']["']\s*\}/],
+    ['word-test reset', /function\s+resetPromptTest[\s\S]{0,260}observations\s*=\s*\{\s*repeat\s*:\s*["']["']\s*,\s*edit\s*:\s*["']["']\s*,\s*return\s*:\s*["']["']\s*\}/]
   ];
   const missing = contracts.filter(([, pattern]) => !pattern.test(source)).map(([name]) => name);
   assert(!missing.length, `Missing rebuilt interaction contracts: ${missing.join(', ')}`);
@@ -511,7 +678,7 @@ check('Final projection copy and interaction disclosure contracts are present', 
   for (const line of ['Part three · 1 of 3 · Make', 'Make A and B in the same tool', 'One willing person generates.', 'Use the same tool. Change only the highlighted phrase.', 'Keep A and B visible. Everyone observes.']) {
     assert(generationText.includes(line), `Slide 12 is missing final Make copy: ${line}`);
   }
-  for (const line of ['Part three · 2 of 3 · Compare', 'Compare A and B', 'What changed?', 'Name the prompt phrase. Point to what moved—or stayed—in the image.', 'What visual shortcut?', 'Which pose, object, or arrangement makes the idea visible?', 'What can’t it show?', 'Name a limit and a next test. We’ll hear two or three ideas.']) {
+  for (const line of ['Part three · 2 of 3 · Compare', 'Compare A and B', 'What changed?', 'Name the prompt phrase. Point to what moved—or stayed—in the image.', 'What visual shortcut?', 'Which pose, object, or arrangement makes the idea visible?', 'What should we test?', 'Propose one word, phrase, or repetition. We’ll choose one together.']) {
     assert(comparisonText.includes(line), `Slide 13 is missing final Compare copy: ${line}`);
   }
   const analysisCards = [...comparisonSource.matchAll(/<div\b[^>]*class\s*=\s*["'][^"']*\banalysis-card\b[^"']*["'][^>]*>/gi)];
@@ -519,7 +686,9 @@ check('Final projection copy and interaction disclosure contracts are present', 
   assert(!/<(?:button|input|textarea|select)\b/i.test(comparisonSource), 'Slide 13 next-test ideas must remain an oral facilitation move, not a new interface.');
 
   assert(/\^\[\\s\.,;:!\?\]\+\$/.test(source), 'Punctuation-only output fragments are not routed to plain text.');
-  assert(!/["']\s*[,.;:!?]\s*["']\s*[,\]]/.test(source), 'A standalone punctuation fragment remains in scenario data.');
+  const scenarioData = /const\s+scenarios\s*=\s*\{([\s\S]*?)\n\s*\};\s*\n\s*const\s+annotationLabelNames/.exec(source);
+  assert(scenarioData, 'Could not isolate the constructed scenario data.');
+  assert(!/["']\s*[,.;:!?]\s*["']\s*[,\]]/.test(scenarioData[1]), 'A standalone punctuation fragment remains in scenario data.');
   return 'anchored hidden-by-default prediction with opt-in exact frequencies, bounded source reveal, exact four-sentence model takeaway, explicit Slide 11 audience task, two prompt sets, and punctuation grouping found';
 });
 
@@ -603,56 +772,72 @@ for (const [ladderName, fixtures] of Object.entries(LADDER_FIXTURES)) {
   });
 }
 
-check('Tally copy frames results as exploratory, not controlled', () => {
+check('Image investigation copy frames results as exploratory, not controlled', () => {
   assert(html, 'index.html was not available for inspection.');
   const text = visibleText(html);
-  assert(/explorator/i.test(text), 'Tally/Part Three copy must call the comparison exploratory.');
+  assert(/explorator/i.test(text), 'Part Three copy must call the comparison exploratory.');
   assert(/not (?:a )?(?:controlled )?experiment|not controlled/i.test(text), 'Copy must say this is not a controlled experiment.');
   assert(/(?:different|cross[- ]tool).{0,80}(?:tools?|models?)|(?:tools?|models?).{0,80}(?:different|variation)/i.test(text), 'Copy must name cross-tool/model variation.');
   assert(/settings?|random(?:ness)?|variation/i.test(text), 'Copy must name settings/randomness or another source of variation.');
   return 'exploratory limitation is visible';
 });
 
-check('Tally uses observable features and neutral interpretation', () => {
+check('Word-to-outcome test uses three observational rounds and neutral interpretation', () => {
   assert(html, 'index.html was not available for inspection.');
-  const tallySource = slideMarkupByLabel(html, 'Room tally');
-  const text = visibleText(tallySource);
+  const testSource = slideMarkupByLabel(html, 'Word-to-outcome test');
+  const text = visibleText(testSource);
   const source = lessonJavaScript.map((item) => item.source).join('\n');
-  const expectedObservations = [
-    ['Front or solo setup?', 'Podium, stage, microphone, or one person apart from the group'],
-    ['Within-the-group setup?', 'The leader is among others at the same level'],
-    ['Front-facing setup?', 'Rows or seats point toward a board or teaching position'],
-    ['Peer-group setup?', 'Desks or seats form clusters, a circle, or shared tables']
-  ];
-  expectedObservations.forEach(([label, help]) => {
-    assert(source.includes(`{ label: "${label}", help: "${help}" }`), `Missing exact prompt-set tally observation: ${label} — ${help}`);
-  });
-  assert(text.includes('Part three · 3 of 3 · Count'), 'Slide 14 is missing its final Count eyebrow.');
-  assert(text.includes('What visual shorthand appeared?'), 'Slide 14 is missing its final title.');
-  const interpretation = 'A visual shortcut is not the relationship itself. A still image cannot show whether listening, instruction, or collaboration is actually happening.';
-  assert(text.includes(interpretation), 'Slide 14 is missing the persistent interpretation guardrail.');
-  assert(/tally-feature-description[\s\S]{0,300}promptSet\.observations\.map/.test(source), 'Prompt-set observations do not update the tally feature description.');
-  assert(/const\s+observation\s*=\s*promptSet\.observations\s*\[\s*rowIndex\s*\]/.test(source), 'Prompt-set observations do not drive rendered tally row labels and help text.');
-  assert(/Count only a clear match; skip unsure\./.test(source), 'Slide 14 is missing the clear-match/skip-unsure tally instruction.');
-  const tallyArray = /tally\s*:\s*\[([\s\S]*?)\]\s*\n\s*\}/.exec(source);
-  assert(tallyArray, 'Could not inspect tally row state.');
-  const rowCount = (tallyArray[1].match(/\{\s*a\s*:\s*0\s*,\s*b\s*:\s*0\s*\}/g) || []).length;
-  assert(rowCount === 2, `Expected exactly two tally rows; found ${rowCount}.`);
-  assert(!/model-chip|tally-delta|delta-label/i.test(html), 'Removed tool-chip or delta tally UI remains.');
-  assert(!/(?:reads as|appears?|apparent)\s+(?:age|\d+|older)|40 or older/i.test(text), 'Subjective apparent-age tally remains in the lesson.');
-  assert(!/held steady|shifted when|one word (?:did not )?move(?:d)? it/i.test(text), 'Automatic causal/steady tally verdict language remains.');
-  return 'two prompt-specific observable rows, dynamic labels/help, and interpretation guardrail; no tool chips, delta, age, or automatic verdict labels';
+  for (const line of [
+    'Part three · 3 of 3 · Test',
+    'What did the word actually control?',
+    'Round 1 · Repeat',
+    'Same prompt ×3',
+    'Round 2 · Specify',
+    'Edit one phrase',
+    'Round 3 · Return',
+    'Use the control again',
+    'Everything you didn’t specify was still decided by something. That something wasn’t you.',
+    'Describe, don’t diagnose.',
+    'These are this room’s observations—not proof that a word caused an outcome.',
+    'One run cannot isolate wording from sampling, settings, the tool, or the model.',
+    'Text stays in this page and clears on reload; enter no names or private information.'
+  ]) {
+    assert(text.includes(line), `Slide 14 is missing its word-to-outcome contract: ${line}`);
+  }
+  const lanes = [...testSource.matchAll(/<article\b[^>]*class\s*=\s*["'][^"']*\bword-test-lane\b[^"']*["'][^>]*>/gi)];
+  assert(lanes.length === 3, `Slide 14 must contain exactly three prompt-test rounds; found ${lanes.length}.`);
+  const outcomeIds = ['word-repeat-outcome', 'word-edit-outcome', 'word-return-outcome'];
+  for (const id of outcomeIds) {
+    assert(new RegExp(`<label\\b[^>]*for\\s*=\\s*["']${id}["'][^>]*>`, 'i').test(testSource), `Slide 14 is missing a label for ${id}.`);
+    assert(new RegExp(`<textarea\\b(?=[^>]*id\\s*=\\s*["']${id}["'])(?![^>]*\\bname\\s*=)[^>]*>`, 'i').test(testSource), `${id} must be an unnamed local textarea.`);
+  }
+  assert(/<label\b[^>]*for\s*=\s*["']word-edit-phrase["'][^>]*>/i.test(testSource), 'Slide 14 editable phrase must have a visible label.');
+  assert(/<input\b(?=[^>]*id\s*=\s*["']word-edit-phrase["'])(?=[^>]*aria-describedby\s*=\s*["']word-edit-diff["'])(?![^>]*\bname\s*=)[^>]*>/i.test(testSource), 'Slide 14 editable phrase must be local, unnamed, and described by its diff status.');
+  assert((testSource.match(/class\s*=\s*["'][^"']*\bword-test-set-button\b[^"']*["']/gi) || []).length === 2, 'Slide 14 must expose both prompt-set choices.');
+  assert((testSource.match(/class\s*=\s*["'][^"']*\bword-control-button\b[^"']*["']/gi) || []).length === 2, 'Slide 14 must expose Prompt A and Prompt B as control choices.');
+  assert(/id\s*=\s*["']word-test-status["'][^>]*role\s*=\s*["']status["'][^>]*aria-live\s*=\s*["']polite["']/i.test(testSource), 'Slide 14 must keep a polite local status region.');
+  assert(!/<form\b/i.test(testSource), 'Slide 14 room descriptions must not be placed in a submission form.');
+  assert(!/data-pairs|pairs-value|tally-row|tally-mini/i.test(testSource), 'Removed tally controls remain on Slide 14.');
+  assert(/promptSets\s*=\s*\{[\s\S]*?leader\s*:\s*\{[\s\S]*?prefix\s*:[\s\S]*?suffix\s*:[\s\S]*?aLabel\s*:[\s\S]*?bLabel\s*:[\s\S]*?classroom\s*:\s*\{[\s\S]*?prefix\s*:[\s\S]*?suffix\s*:[\s\S]*?aLabel\s*:[\s\S]*?bLabel\s*:/i.test(source), 'Prompt sets must supply one shared frame and both editable phrases to Slides 12 and 14.');
+  const causalSurface = text + '\n' + source;
+  assert(!/(?:reads as|appears?|apparent)\s+(?:age|\d+|older)|40 or older/i.test(causalSurface), 'Subjective apparent-age tally language remains in the lesson.');
+  assert(!/held steady|shifted when|one word (?:did not )?move(?:d)? it/i.test(causalSurface), 'Automatic causal/steady verdict language remains.');
+  return 'three local described-outcome rounds, shared prompt controls, causal guardrail, and age/verdict bans found';
 });
 
-check('Tally source includes a cap tied to pairs reported', () => {
+check('Word-to-outcome source keeps observations local, synchronized, and resettable', () => {
   const source = lessonJavaScript.map((item) => item.source).join('\n');
-  assert(source, 'Lesson JavaScript was not available for tally inspection.');
-  const compact = source.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, ' ').replace(/\s+/g, ' ');
-  const hasNamedCap = /\b(?:clamp|cap|limit|bound)[A-Za-z0-9_$]*(?:Tally|Count|Pairs|Reported)/i.test(compact);
-  const hasMathMinCap = /Math\.min\s*\([^)]*\bpairs?(?:Reported)?\b[^)]*\)|Math\.min\s*\([^)]*\bstate\s*\.\s*pairs\b[^)]*\)/i.test(compact);
-  const hasGuard = /(?:count|current|next|value)[A-Za-z0-9_$]*\s*(?:>=|>)\s*(?:state\s*\.\s*)?pairs(?:Reported)?\b/i.test(compact);
-  assert(hasNamedCap || hasMathMinCap || hasGuard, 'Could not find source-level evidence that each tally count is capped at pairs reported.');
-  return 'count cap found in lesson source';
+  assert(source, 'Lesson JavaScript was not available for prompt-test inspection.');
+  assert(/function\s+composePrompt\s*\(\s*promptSet\s*,\s*phrase\s*\)[\s\S]{0,180}promptSet\.prefix\s*\+\s*phrase\.trim\(\)\s*\+\s*promptSet\.suffix/.test(source), 'Slide 14 must compose its prompt from the selected Slide 12 frame and editable phrase.');
+  assert(/function\s+renderPromptSet[\s\S]{0,350}\.prompt-set-button, \.word-test-set-button[\s\S]{0,350}prompt-a-text[\s\S]{0,180}prompt-b-text/.test(source), 'Slide 12 and Slide 14 prompt-set controls are not synchronized by one renderer.');
+  assert(/function\s+renderPromptTest[\s\S]{0,1000}word-repeat-prompt[\s\S]{0,200}word-return-prompt[\s\S]{0,300}word-edit-phrase[\s\S]{0,400}word-repeat-outcome[\s\S]{0,200}word-edit-outcome[\s\S]{0,200}word-return-outcome/.test(source), 'Slide 14 renderer must restore both control prompts, the editable phrase, and all three local descriptions.');
+  assert(/function\s+resetPromptTest[\s\S]{0,260}editPhrase\s*=\s*promptTestControlPhrase\(\)[\s\S]{0,180}observations\s*=\s*\{\s*repeat\s*:\s*["']["']\s*,\s*edit\s*:\s*["']["']\s*,\s*return\s*:\s*["']["']\s*\}/.test(source), 'Prompt-test reset must restore the control wording and clear all three descriptions.');
+  assert(/\.prompt-set-button, \.word-test-set-button[\s\S]{0,500}state\.promptSet\s*=\s*nextSet[\s\S]{0,180}state\.promptTest\.controlSide\s*=\s*["']b["'][\s\S]{0,180}resetPromptTest/.test(source), 'Changing the prompt set must synchronize both slides and clear the prior run log.');
+  assert(/word-edit-phrase[\s\S]{0,180}addEventListener\(\s*["']input["'][\s\S]{0,180}state\.promptTest\.editPhrase\s*=\s*event\.target\.value/.test(source), 'Editable prompt input is not retained in local prompt-test state.');
+  assert(/\[\s*["']repeat["']\s*,\s*["']edit["']\s*,\s*["']return["']\s*\]\.forEach[\s\S]{0,260}state\.promptTest\.observations\s*\[\s*round\s*\]\s*=\s*event\.target\.value/.test(source), 'All three described outcomes must update local prompt-test state.');
+  assert(/renderPromptSet\(\)\s*;\s*resetPromptTest\(\)\s*;/.test(source), 'Reload initialization must restore the default prompt and clear the local run log.');
+  assert(!/\bstate\s*\.\s*pairs\b|\bstate\s*\.\s*tally\b|function\s+(?:changePairs|changeTally|renderTally|tallyLineHtml)\b/.test(source), 'Removed tally state or rendering functions remain in lesson source.');
+  return 'shared prompt selection, local editing, three outcome fields, reset behavior, and no tally state found';
 });
 
 const passed = results.filter((result) => result.ok).length;

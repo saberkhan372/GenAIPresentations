@@ -1,8 +1,8 @@
 # Meaning ↔ Prediction — Facilitator Guide
 
-This guide accompanies the canonical 16-slide webpage in this folder: a 15-slide lesson plus one optional transparency afterword. It is written for the person operating the projected deck and leading the room. It is not participant-facing copy and does not replace the interactive webpage. For the development history and rationale behind these choices, see [design.md](./design.md).
+This guide accompanies the canonical 17-slide webpage in this folder: a 15-slide lesson plus optional feedback and transparency slides. It is written for the person operating the projected deck and leading the room. It is not participant-facing copy and does not replace the interactive webpage. For the public development history and rationale behind these choices, see [development-notes.md](./development-notes.md).
 
-The lesson is projection-first. Participants use journals for most of the session and open computers only for the image comparison on Slide 12. One facilitator operates the deck. Any participant may observe, record, question, or decline instead of using an AI tool.
+The required lesson is projection-first. Participants use journals for most of the session and open computers only for the image investigation on Slides 12–14. One facilitator operates the deck. Any participant may observe, record, question, or decline instead of using an AI tool. After the lesson, optional Slide 16 feedback should preferably use the direct Google Form on a private device. The projected form remains available, but anything typed there is visible to the room. Slide 17 is the deck's literal ending while Slide 15 remains the pedagogical close.
 
 ## The lesson in one sentence
 
@@ -15,7 +15,7 @@ By the end of the session, participants should have experienced four moves:
 1. **Meaning depends on context.** People use stated words, familiar patterns, and lived or local knowledge when they interpret an under-specified message.
 2. **Prediction can be made visible.** A small historical corpus can show how a text context narrows the set of words that have actually followed it.
 3. **An analogy needs boundaries.** Exact corpus lookup and a modern language model share a context–continuation loop, but they do not use the same mechanism.
-4. **Outputs can become evidence.** Comparing two generations, naming visible differences, counting room observations, and proposing a next test is more useful than treating one output as a verdict.
+4. **Outputs can become evidence.** Comparing generations, naming visible differences, repeating a control prompt, editing one phrase, and returning to the control is more useful than treating one output as a verdict.
 
 The lesson is also designed to model a stance: keep context visible, distinguish evidence from inference, and remain curious enough to test a claim.
 
@@ -52,7 +52,7 @@ Roles are invitations, not requirements. A table may combine or rotate them.
 - **Generator:** one willing person operates an image tool on Slide 12.
 - **Observer:** notices visible details in both images.
 - **Recorder:** writes the table's evidence and next question.
-- **Reporter:** shares the table's counts or observations aloud.
+- **Reporter:** shares the table's observations or proposed next test aloud.
 - **Questioner:** names assumptions, missing context, or what should be verified.
 
 A participant who does not want to use an AI tool can fully participate as an observer, recorder, reporter, questioner, or by declining the activity.
@@ -62,7 +62,7 @@ A participant who does not want to use an AI tool can fully participate as an ob
 Do this check on the actual presentation computer, browser, projector, and venue network. A successful test on another machine is useful but not conclusive.
 
 1. Open `index.html` from the canonical folder.
-2. Confirm that Slide 1 appears and the persistent counter reads `1 / 16`.
+2. Confirm that Slide 1 appears and the persistent counter reads `1 / 17`.
 3. Confirm that no full-screen startup error reports a missing corpus. If it does, put `corpus-data.js` back in the same folder as `index.html` and reload.
 4. Set browser zoom to 100%. Enter full screen and inspect the edges of every slide for clipping at the actual projector resolution.
 5. On Slide 2, confirm that Long Story Short loads inside the frame. Also test **Open Long Story Short ↗** in a separate tab; this is the fallback if embedding is blocked.
@@ -73,11 +73,12 @@ Do this check on the actual presentation computer, browser, projector, and venue
    - Slide 9: choose a starting word, append at least two words, add actual left context, undo, start again, and reveal the source;
    - Slide 11: change scenario, choose a label, and label and clear a phrase; and
    - Slide 12: switch between both prompt sets and confirm the prompt text changes; and
-   - Slide 14: add a table, change A and B counts in both rows, and lower the denominator.
-8. Inspect optional Slide 16 for projector fit. Confirm that it says **estimated, not metered**; distinguishes **this workshop deck** from the separate **Spring Gen AI class** scenario; shows the class midpoint and wide scenario span; and keeps the safeguard strip legible.
-9. Reload the page. Confirm that dots, added perspective ideas, prediction history, annotations, the prompt-set choice, and tally counts all clear.
-10. Leave the direct Long Story Short link available in another tab if the embed has been unreliable.
-11. Decide where you will shorten the lesson if image generation or discussion takes longer than expected. Recommended cuts appear in the pacing section below.
+   - Slide 14: switch both prompt sets and A/B controls, edit the highlighted phrase, restore the control phrase, and type disposable descriptions into all three rounds.
+8. On optional Slide 16, confirm that Questions 1 and 2 occupy the upper row and the wider Question 3 surface spans the lower row, preserving the visible 1 → 2 → 3 order. Check the brief Q1/Q3 answering cues and the Part One/Part Two/Part Three map inside the first three Q2 choices. Confirm the private-device guidance and direct-form link, then test Q1/Q2 required behavior, Q3 optional behavior, the Other write-in requirement, and typing without slide navigation. Use the separate optional accounting control to open Slide 17 and confirm that it does not submit or clear the form. Do not press **Send feedback** during rehearsal.
+9. Enter disposable text on Slide 14 and unsent text on Slide 16, reload, and confirm both clear alongside dots, added perspective ideas, prediction history, annotations, and the prompt-set choice.
+10. Inspect optional Slide 17 for projector fit. Confirm that it says **estimated, not metered**; distinguishes **this workshop deck** from the separate, course-scoped **Spring Gen AI class** scenario; marks exactly one circle **Scale anchor · largest in this view**; and keeps the expanded safeguard rationale legible. Switch through Energy, CO₂, and Water with pointer and keyboard. In each view, confirm that all four circles, values, units, scenario-range labels, and boundary note change together, and that Energy is restored after reload.
+11. Leave the direct Long Story Short link available in another tab if the embed has been unreliable.
+12. Decide where you will shorten the lesson if image generation or discussion takes longer than expected. Recommended cuts appear in the pacing section below.
 
 ### Optional arrival sequence
 
@@ -100,8 +101,9 @@ Be precise about privacy:
 - Long Story Short and participants' image tools are external services with their own network requests, histories, terms, and data practices.
 - Do not say that “nothing leaves the room.” That claim would be inaccurate when external services are used.
 - The room matrix is anonymous by design. Do not ask participants to label dots or interpret a cluster as a participant profile.
-- The room tally records aggregate counts only. Do not enter demographic guesses or infer identity, intent, or character from a generated image.
-- The public lesson build excludes student work, grades, rosters, and internal review traces. Do not copy any of those materials into the canonical or public folder to “support” Slide 16.
+- Slide 14 stores one edited phrase and three room descriptions only in the open page. Anything typed is visible on the projection. Do not enter demographic tallies, names, private information, or claims about identity, intent, competence, or character. The page does not generate a same/different, default, or causal verdict.
+- The public lesson build excludes student work, grades, rosters, and internal review traces. Do not copy any of those materials into the canonical or public folder to “support” Slide 17.
+- Slide 16 requests no name or email. Prefer the direct Google Form on a respondent's private device because anything typed on the projected form is visible to the room. Responses go directly to Google Forms only after a viewer presses **Send feedback**; Google applies its own privacy terms. Ask respondents not to include private, student, personnel, or school information. The deck retains no response copy, and reload clears only unsent fields—it does not delete anything already submitted to Google.
 
 ## Suggested pacing — facilitator discretion
 
@@ -115,7 +117,8 @@ The deck intentionally shows no time estimates. The following is a private plann
 | Part Two · Prediction | 8–11 | About 15 minutes | Give Slide 9 the largest share; one strong phrase is better than trying every starting word. Use one labeling scenario if needed. |
 | Part Three · Investigation | 12–14 | About 12 minutes | Generation speed is unpredictable. Choose one prompt set. If needed, collect one whole-room pair instead of one per table. |
 | Close | 15 | About 3 minutes | Protect at least one private journal response and the final distinction between output and evidence. |
-| Optional transparency afterword | 16 | Outside the required 45-minute arc | Show only if authorship, AI use, or environmental cost comes up. Do not let it replace the Slide 15 close. |
+| Optional feedback | 16 | Outside the required 45-minute arc | Offer after the close if useful. Prefer the direct Google Form on private devices; projected typing is visible to the room. Do not require a response. |
+| Optional transparency afterword | 17 | Outside the required 45-minute arc | Show only if authorship, AI use, or environmental cost comes up. It is the deck's literal ending but does not replace the Slide 15 close. |
 
 For a shorter version:
 
@@ -123,11 +126,11 @@ For a shorter version:
 - Use one Prediction Machine starting word and reveal the corpus after two or three choices.
 - Use one constructed example on Slide 11.
 - Generate one A/B pair for the whole room instead of one per table.
-- Tally one observable feature instead of all three, but keep the denominator explicit.
+- On Slide 14, complete Round 1's same prompt ×3 and one edited prompt if time does not permit the return round; state plainly that the shortened sequence is even less able to support a causal claim.
 
 Do not shorten by skipping Slide 10. The distinction between transparent lookup and learned prediction is the conceptual guardrail for the lesson.
 
-The background shifts are facilitation cues, not new content slides. Peach with a clay rail marks **Part One · Meaning** on Slides 5–7; pale sage with an olive rail marks **Part Two · Prediction** on Slides 8–11; lavender with a plum rail marks **Part Three · Investigation** on Slides 12–14. Each part repeats the same rail, circle motif, and eyebrow structure. Slides 1–4, the Slide 15 close, and optional Slide 16 remain outside the part treatments.
+The background shifts are facilitation cues, not new content slides. Peach with a clay rail marks **Part One · Meaning** on Slides 5–7; pale sage with an olive rail marks **Part Two · Prediction** on Slides 8–11; lavender with a plum rail marks **Part Three · Investigation** on Slides 12–14. Each part repeats the same rail, circle motif, and eyebrow structure. Slides 1–4, the Slide 15 close, and optional Slides 16–17 remain outside the part treatments.
 
 ## Presentation controls
 
@@ -136,18 +139,18 @@ The persistent controls at the lower right are visible on every slide:
 - **← / →:** previous or next slide;
 - **Notes:** open or close the facilitator notes embedded in the webpage;
 - **Full:** request browser full-screen mode; and
-- **current / 16:** current slide and total slide count.
+- **current / 17:** current slide and total slide count.
 
 Keyboard navigation:
 
 - **Right Arrow**, **Page Down**, or **Space:** next slide;
 - **Left Arrow** or **Page Up:** previous slide;
 - **Home:** Slide 1;
-- **End:** optional Slide 16. To deliver the normal close, navigate to Slide 15 and stop there;
+- **End:** optional Slide 17, **This deck is also evidence.** To deliver the normal pedagogical close, navigate to Slide 15 and stop there;
 - **N:** toggle facilitator notes when focus is not inside an interactive control; and
 - **Escape:** close facilitator notes. In the matrix, Escape first clears matrix selection and returns focus to the Next control.
 
-Interactive buttons, forms, the matrix, the Prediction Machine, and tally controls consume their own keyboard events. This prevents a press of Space or an arrow key inside an activity from accidentally advancing the deck.
+Interactive buttons, forms, the matrix, the Prediction Machine, and Slide 14's word-test fields consume their own keyboard events. This prevents a press of Space or an arrow key inside an activity from accidentally advancing the deck.
 
 ## Slide-by-slide facilitation
 
@@ -598,7 +601,7 @@ Repeat the participation and privacy frame:
 
 **Choose a prompt set**
 
-The selected button exposes `aria-pressed="true"`. Changing sets updates the projected A/B text, updates the A/B legend on Slide 14, and clears any existing denominator and tally. Make the choice before tables report observations.
+The selected button exposes `aria-pressed="true"`. Changing sets updates the projected A/B text and Slide 14's matching prompt-set selector. It also resets Slide 14 to Prompt B and clears its edited phrase and three local descriptions. Make the choice before tables generate or report observations.
 
 **Prompt set 1 · leader**
 
@@ -636,13 +639,13 @@ Using the same tool reduces one source of variation but does not create a contro
 
 **Transition**
 
-> Keep both images visible. Before we count anything, compare them side by side and separate observation from explanation.
+> Keep both images visible. Compare them side by side, separate observation from explanation, and decide what the room wants to test next.
 
 ### Slide 13 — Compare A and B
 
 **Purpose**
 
-Create an observation pause between generation and tally. The room should identify evidence and a next test before making a claim.
+Create an observation pause between generation and the follow-up test. The room should identify evidence and choose one word, phrase, or repetition to investigate before making a claim.
 
 **Facilitation · Compare (2 of 3)**
 
@@ -650,9 +653,9 @@ Ask tables to move through the three projected cards in order:
 
 1. **What changed?** Name the deliberate prompt phrase—*addressing* became *listening to*, or *instruction* became *collaboration*—then point to what moved or stayed in the image.
 2. **What visual shortcut?** Identify the pose, object, or arrangement that makes the abstract idea visible. Treat it as familiar visual shorthand, not as the relationship itself.
-3. **What can’t it show?** Name a limit of the still image and propose a next test. The image cannot establish whether listening, instruction, or collaboration actually happened.
+3. **What should we test?** Propose one word, phrase, or repetition. The room will choose one together for Slide 14.
 
-After tables have named a next test privately, collect **two or three proposed next tests aloud**. Ask each reporter to state the variable they would change or the repetition they would run, and what observation would make the test informative. Do not add the proposals to the webpage or turn the share into another tally. This short oral round is the participant-agency payoff: the room shifts from carrying out the supplied A/B comparison to designing what it would investigate next.
+After tables have named a next test privately, collect **two or three proposed next tests aloud**. Ask each reporter to state the word or phrase they would change, or the repetition they would run, and what visible observation would make the test informative. Do not enter every proposal into the webpage. Choose one bounded test for Slide 14. This short oral round is the participant-agency payoff: the room shifts from carrying out the supplied A/B comparison to designing what it will investigate next.
 
 **Room language to encourage**
 
@@ -672,77 +675,65 @@ Reframe with:
 
 **Transition**
 
-> We now have observations at the tables. The tally will summarize what this room saw without pretending to isolate a cause.
+> We now have observations and a question. We will repeat one control prompt, edit one phrase, then return to the control—describing each round without pretending to isolate a cause.
 
-### Slide 14 — What visual shorthand appeared?
+### Slide 14 — What did the word actually control?
 
 **Purpose**
 
-Aggregate observable features across reported A/B pairs while keeping the denominator visible and the causal limits explicit.
+Turn one room-proposed question into a disciplined prompt test: repeat the unchanged control, edit one phrase, then return to the control. Record descriptions without converting a few images into an identity measure or a causal verdict.
 
-**Facilitation · Count (3 of 3)**
+**Facilitation · Test (3 of 3)**
 
-**Step 1: enter the denominator first**
+**Choose the prompt set and control**
 
-Ask how many tables successfully made and can report both images. Use the **−** and **+** controls beside **Tables**.
+The leader/community and classroom buttons mirror Slide 12. Use the prompt set the room already generated unless there is a clear reason to switch. Then choose Prompt A or Prompt B as the control; Prompt B is the default.
 
-- The tally begins at zero.
-- Observation controls stay visibly disabled until the denominator is at least one.
-- The page supports 0–30 reporting tables.
-- If the denominator is lowered, any larger A or B counts are automatically clamped to the new denominator.
+Changing the prompt set or A/B control clears the edited phrase and all three local descriptions. The live status announces that reset. Make these choices before anyone enters observations.
 
-Count only tables with both A and B. Do not include a table that produced only one image in this denominator.
+**Round 1 · Repeat — Same prompt ×3**
 
-**Step 2: count visible features**
+Keep the same tool and settings. Run the exact read-only control prompt three times without changing its wording. Ask the room to describe what recurred and what varied, then enter one concise summary in **How did the room describe the three images?**
 
-The A/B legend follows the prompt set selected on Slide 12:
+Use room-attributed language when a description depends on interpretation: “The room described…” or “Several people read the depicted person as…”. Do not turn one subjective reading into a demographic category or count.
 
-- leader pair: **A = addressing**, **B = listening to**; or
-- classroom pair: **A = instruction**, **B = collaboration**.
+**Round 2 · Specify — Edit one phrase**
 
-The two row labels and their help text also follow that prompt-set selection.
+Edit only the highlighted phrase in the middle prompt. The line below reports the literal text change—for example, the control phrase followed by the new phrase. This is a text diff, not a conclusion about the images. Use **Restore control** if more than the intended phrase changed.
 
-For the leader/community pair:
+Generate the edited prompt in the same tool and settings. Enter the room's description in **How did the room describe the edited image?** The field's instruction is deliberate: describe what was visible; do not explain why.
 
-1. **Front or solo setup?** — *Podium, stage, microphone, or one person apart from the group*
-2. **Within-the-group setup?** — *The leader is among others at the same level*
+**Round 3 · Return — Use the control again**
 
-For the classroom pair:
+Run the original read-only control prompt once more. Enter the room's description in **How did the room describe the return image?** This adds another observation after the intervention; it does not prove that a feature reverted, that a fixed default exists, or that wording alone caused the outcome.
 
-1. **Front-facing setup?** — *Rows or seats point toward a board or teaching position*
-2. **Peer-group setup?** — *Desks or seats form clusters, a circle, or shared tables*
+**Discuss without automating the verdict**
 
-Count only a clear match for each A or B image. Skip an unsure image rather than forcing it into either count.
+Read the projected guardrail before interpretation:
 
-Use the row's **− / +** controls separately for A and B. Each value appears as `count / tables`, and the bar updates. There are no delta labels or tool chips; compare the two fractions directly.
+> Describe, don't diagnose. These are this room's observations—not proof that a word caused an outcome. One run cannot isolate wording from sampling, settings, the tool, or the model.
 
-**A clean reporting routine**
+Then ask:
 
-1. Read one feature.
-2. Ask for A hands or table reports; enter the A count.
-3. Ask for B hands or table reports; enter the B count.
-4. State the result descriptively: “In this room's reported images, the feature appeared in A for _ of _ tables and in B for _ of _.”
-5. Ask what the room would test next.
+- What recurred across the three unchanged runs?
+- What varied even though the prompt did not?
+- What did the added phrase specify that the control left open?
+- What else besides wording could explain the sequence?
+- What would a larger or better-controlled test require?
 
-Keep the projected interpretation guardrail in view and read it before discussing a pattern:
+The page intentionally does not offer same/different buttons, a “default” label, demographic checkboxes, or an automatic conclusion. The facilitator may help the room form a tentative causal sentence aloud, but it must remain a hypothesis bounded by the small sample and uncontrolled influences.
 
-> A visual shortcut is not the relationship itself. A still image cannot show whether listening, instruction, or collaboration is actually happening.
+**Privacy and state**
 
-**Cautions**
+The edited phrase and three descriptions stay only in this open page and clear on reload. They are never transmitted by the deck. Anything typed is visible on the projection, so enter no names, private information, or identifying descriptions. The deck receives no generated images and records no tool or model name.
 
-- The bars describe this room's reported images only.
-- They do not isolate prompt wording, model, tool, settings, or randomness as the cause.
-- Do not fabricate a denominator or count when a table did not report.
-- Record observable features, not demographic guesses.
-- A difference of zero is still a result: this room did not observe a difference on that feature in this set of generations.
+**If the full sequence cannot be completed**
 
-**If no table completes both images**
-
-Leave the denominator at zero. Use the status message as an honest record and conduct a qualitative debrief from any visible examples. Do not unlock the tally by inventing a pair.
+Do not invent a generation or description. Leave the unavailable field blank and state which round is missing. A repeat-only or repeat/edit sequence can still support a careful discussion, but it is weaker evidence and cannot establish a cause.
 
 **Transition**
 
-> We changed language, observed outputs, counted what we could point to, and ended with another test—not a verdict. Let us carry those habits back to everyday judgment.
+> We repeated the control, changed one phrase, and returned to the original. We ended with descriptions and another question—not a verdict. Let us carry those habits back to everyday judgment.
 
 ### Slide 15 — Meaning ↔ Prediction
 
@@ -778,11 +769,72 @@ Name the sequence as one possible way to keep inquiry moving: observe practice, 
 
 Do not turn the final share into a requirement. A private journal response is a complete close.
 
-### Slide 16 — This deck is also evidence. (optional afterword)
+### Slide 16 — What should travel forward? (optional feedback)
 
 **Purpose**
 
-Answer an authorship or environmental-cost question transparently without pretending retrospective estimates are telemetry. This slide is not a second close. Use it after Slide 15 only if it serves a question in the room.
+Collect a small amount of voluntary lesson feedback without requesting a name, email, account, file, or student information. This is an optional follow-up after the real Slide 15 close, not a participation requirement. Prefer private-device entry because anything typed into the projected form is visible to the room.
+
+**Read the full-canvas sequence**
+
+The three numbered surfaces fill the canvas in order: Question 1 at upper left, Question 2 at upper right, then the wider Question 3 field across the lower row. Move through them as **1 → 2 → 3**. The larger third surface is intentional; it gives the open response usable writing space rather than leaving the lower-right canvas empty.
+
+The added context is deliberately tied to answering. Q1’s cue says that a question, habit, or boundary is enough. Q3 asks for one moment to revise, shorten, or investigate and explicitly permits a blank response. In Q2, the first three choices double as a map of the lesson the room just completed:
+
+- **Part One · Meaning · Slides 5–7:** **What context is missing?**
+- **Part Two · Prediction · Slides 8–11:** **What did the system add?**
+- **Part Three · Investigation · Slides 12–14:** **What should I verify or test?**
+
+Treat the map as a reminder, not a quiz. Participants are choosing the question they want to carry forward; they are not being asked to identify the “correct” part of the lesson.
+
+**The exact questions**
+
+1. Required: **What idea from this lesson will you carry forward?**
+2. Required: **Which question feels most useful to carry into future AI use?** Choices are **What context is missing?**, **What did the system add?**, **What should I verify or test?**, **I’m still deciding**, and **Other**.
+3. Optional: **What should be clearer, shorter, or explored next—if anything?**
+
+If **Other** is selected, its write-in becomes required. Typing into that field selects Other automatically. The page will not send a selected Other with an empty write-in.
+
+**Before anyone responds**
+
+Say:
+
+> This feedback is optional. The form requests no name or email. Responses go to Google Forms only if you press Send, and Google applies its own privacy terms. Please do not include private, student, personnel, or school information.
+
+Add:
+
+> If you want to respond privately, use the direct form on your own device. Anything typed on this projected screen is visible to the room. You may also skip the feedback entirely.
+
+Do not call the form anonymous. It has no name or email question, but the deck cannot make promises about network metadata or Google’s processing.
+
+**Two response routes**
+
+- **Preferred:** open or share **Open direct form ↗** on the respondent's private device. This keeps response text off the shared projection while using the same Google Form.
+- **Projected fallback:** a willing viewer may enter responses into the custom projected form with the understanding that the room can see the text. Do not pass the facilitator keyboard around for a public response round or ask participants to call out answers. Nothing is sent before **Send feedback**. The browser posts the three response fields directly to Google Forms through a hidden transport frame; the Google Form is not visibly embedded.
+
+The deck retains no response copy. Reload clears unsent text and choices. Reloading does not delete a response already submitted to Google Forms.
+
+**Reading the status honestly**
+
+The custom page cannot read Google’s cross-origin confirmation. If the hidden response page finishes loading, the status says the transport finished but cannot independently verify how Google recorded the response. If no confirmation returns within 15 seconds or the transport errors, the status says the response may not have been recorded and points to **Open direct form**.
+
+Do not press Send repeatedly because the status is cautious; that may create duplicate responses. When certainty matters, use the direct form once.
+
+**Accessibility and keyboard note**
+
+The form uses native required fields, a fieldset and legend for Q2, a polite status region, and a busy state while sending. Keyboard events inside inputs and the textarea do not advance the deck. If validation focuses a field, let the respondent complete it or choose another option before navigating away.
+
+**Exit**
+
+Thank respondents without asking them to identify what they submitted. Do not look over private devices or ask participants to announce completion. If no one responds, leave it there; a declined or skipped feedback form is complete participation.
+
+After Question 3, the separate optional accounting control opens Slide 17 without submitting, validating, clearing, or changing any feedback field. Name the choice plainly: viewers can finish on Slide 16, or open **This deck is also evidence** if the accounting afterword serves them. Do not imply that opening Slide 17 is required to complete the form.
+
+### Slide 17 — This deck is also evidence. (optional afterword)
+
+**Purpose**
+
+Answer an authorship or environmental-cost question transparently without pretending retrospective estimates are telemetry. This slide is not a second pedagogical close. It is the deck's literal ending and should appear only if it serves a question in the room.
 
 **Before showing it**
 
@@ -792,26 +844,26 @@ Say plainly:
 
 **Facilitation**
 
-1. Keep the two originality lenses separate. **Direction + judgment** concerns who set the purpose, pedagogy, boundaries, corrections, and final decisions. **Literal words + code** concerns who produced the prose and implementation surface. Do not combine them into one ownership score.
+1. Keep the two originality lenses separate. **Direction + judgment** concerns who set the purpose, pedagogy, boundaries, corrections, and final decisions. **Literal words + code** concerns who produced the prose and implementation surface. Read the horizontal ranges on their shared 0–80% axes; do not combine them into one ownership score.
 2. Name Saber’s estimated **four active hours** as direction, testing, correction, and final decisions inside an approximately six-hour final build window—not as the total time invested in the course.
-3. Read the environmental rows as separate scopes. **This workshop deck** is approximately **1 kWh, 0.35 kg CO₂e, and 3–4 L**. The **Spring Gen AI class** central scenario is approximately **6 kWh, 2 kg CO₂e, and 20 L**, including modeled teacher preparation and modeled student use. Do not add the rows.
-4. Name the class scenario's unusually wide span: **0.8–81 kWh, 0.3–28 kg CO₂e, and 3–280 L**. This is a scenario envelope, not a confidence interval. Unknown video mix and retries dominate the width.
+3. Use the **Energy / CO₂ / Water** selector to keep one unit active at a time. Each view re-scales four circle areas: **this workshop deck**, the separate **Spring Gen AI class** scenario, and six-hour U.S. and Bangladesh per-resident national references. Point out **Scale anchor · largest in this view** inside the U.S. circle: it remains full-size because it is the maximum in all three active views, not because the tabs share one scale. Compare circle areas only within the selected metric, never across tabs, and do not add the deck and class scopes.
+4. Read the central deck and class estimates as the metric changes: **1 and 6 kWh**; **0.35 and 2 kg CO₂e**; or **3.5 and 20 L operational water**. The compact scenario-range strip changes too: the deck spans **0.3–3 kWh, 0.04–2.1 kg CO₂e, or 0.1–12 L**; the class spans **0.8–81 kWh, 0.3–28 kg CO₂e, or 3–280 L**. These are scenario envelopes, not confidence intervals. Unknown video mix and retries dominate their width.
 5. Explain what made the rough student estimate possible without inspecting student work: only de-identified totals—**98 document submissions** and **171 submitted media files**—were used. No provider telemetry exists, and local laptops/displays, storage and network transfer, embodied hardware, and model training remain outside the scenario.
-6. Treat the U.S. and Bangladesh figures as per-resident national scale references only. They are not matched project footprints and do not identify where the project's computation ran.
-7. State the water boundary: AI operational water consumption and municipal water withdrawal are different measures; the comparison is volume-only.
-8. Read or paraphrase the safeguards: **Only de-identified totals were used. No student work, names, grades, rosters, prompts, or accounts were opened or published.** The deck collects no names, files, or images; room state clears on reload; and external tools retain their own privacy practices.
+6. Read the six-hour U.S. and Bangladesh per-resident references in the active view: **8.8 and 0.41 kWh**; **9.3 and 0.48 kg territorial CO₂**; or **120 and 14.5 L municipal water withdrawal**. Six hours matches the approximate final deck build window. It is not the duration of the course-scoped class scenario. The country figures provide scale only, not matched project footprints or evidence of where computation ran.
+7. State the active boundary caveat. Modeled AI CO₂e and territorial national CO₂ are not equivalent accounting measures. AI operational water and municipal water withdrawal also use different boundaries, so the water comparison is volume-only. Use [`AI-accounting.md`](./AI-accounting.md) for the fuller method and sources.
+8. Read the safeguard principle before the practices: **Transparency should expose the method—not the people behind the data.** Then paraphrase the three reasons. **Aggregate only:** the estimate needs counts, not identities or content; no student work, names, grades, rosters, prompts, or accounts were opened or published. **Ephemeral room:** page entries clear on reload so participation does not become a retained record. **Submit by choice:** Slide 16 sends only deliberately submitted feedback directly to Google Forms, and the deck keeps no copy. Google and other external tools apply their own privacy terms.
 
 **Suggested language**
 
-> People set the purpose and made the final judgments; AI systems produced much of the literal surface and review. This workshop deck is modeled at about 1 kWh. A separate Spring-class scenario—teacher preparation plus modeled student use—is about 6 kWh, with a very wide span because video and retries matter. Only de-identified totals were used; no student material or account information was opened.
+> People set the purpose and made the final judgments; AI systems produced much of the literal surface and review. Choose Energy, CO₂, or Water to compare the deck, the separate Spring-class scenario, and six-hour U.S. and Bangladesh per-resident references. The marked scale anchor is the largest value in that view, so compare areas only inside one tab. Six hours matches the deck build, not the class course. Transparency should expose the method, not the people: only de-identified totals were used, and no student material or account information was opened.
 
 **If someone asks for a single exact number**
 
-Point to the range and the **estimated, not metered** label. Explain that the Codex and Claude retrospective token estimates differed by roughly threefold and neither had provider telemetry. The agreement is an order of magnitude, not precision. Direct them to [`AI-accounting.md`](./AI-accounting.md) for the method and sources.
+Point to the active range and the **estimated, not metered** label. Explain that the Codex and Claude retrospective token estimates differed by roughly threefold and neither had provider telemetry. The agreement is an order of magnitude, not precision. The national values are scale references, not extra evidence that narrows the project estimate. Direct them to [`AI-accounting.md`](./AI-accounting.md) for the method and sources.
 
 **Exit**
 
-Do not end the workshop here. If Slide 16 was shown, briefly return verbally to Slide 15’s final question: **What should we verify or test?**
+Because this is the deck's literal ending, finish here if it was shown. Close verbally on Slide 15’s final question: **What should we verify or test?**
 
 ## Contingency plans
 
@@ -833,7 +885,7 @@ Exit full screen, set browser zoom to 100%, resize the browser to the projector,
 
 ### An interactive control appears unresponsive
 
-First check whether keyboard focus is on the intended control. On Slide 14, remember that observation controls are intentionally disabled while tables equal zero. If state has become confusing, reload only if you are willing to clear every interaction in the deck. There is no partial reset across all activities.
+First check whether keyboard focus is on the intended control. On Slide 14, changing the prompt set or A/B control intentionally clears the edited phrase and three local descriptions. **Restore control** changes only the editable phrase back to the selected control wording. If state has become confusing, reload only if you are willing to clear every interaction in the deck. There is no whole-deck partial reset.
 
 ### Image generation is slow, unavailable, or account-gated
 
@@ -843,7 +895,7 @@ Choose the least disruptive option:
 - have one willing table or the facilitator create a single whole-room A/B pair;
 - use an already completed pair from a table, with permission, on that table's screen rather than uploading it into the deck;
 - compare the two prompts and write predictions about what might change, clearly labeling them as predictions rather than observations; or
-- skip the tally and preserve the final distinction between an output, an observation, and a next test.
+- skip unavailable word-test rounds and preserve the final distinction between an output, an observation, and a next test. Leave missing fields blank rather than fabricating descriptions.
 
 Do not create accounts, purchase access, or ask participants to disclose credentials during the session.
 
@@ -859,9 +911,13 @@ Pause. Do not require the table to display or explain it. Offer the choice to re
 
 Use private journals first, then invite table-level rather than individual reporting. A facilitator may operate all projected interactions from volunteered language. Do not turn anonymous dots or tool use into compliance measures.
 
+### Slide 16 cannot send or confirmation is unclear
+
+Read the status literally. The local page cannot independently verify how Google recorded a response. Prefer **Open direct form ↗** on a private device rather than claiming success, changing endpoint fields, or asking someone to submit repeatedly. If the direct form is unavailable, skip feedback; do not copy responses into email, chat, or another improvised service. Do not ask someone to troubleshoot by retyping a private response on the shared projection.
+
 ### The session runs short
 
-Protect Slide 10 and Slide 15. Skip optional Slide 16. Use one perspective on Slide 6, one starting word on Slide 9, one example on Slide 11, and one whole-room image pair. It is better to complete the conceptual arc with fewer examples than to end after generation without investigation.
+Protect Slide 10 and Slide 15. Skip optional Slides 16 and 17. Use one perspective on Slide 6, one starting word on Slide 9, one example on Slide 11, and one whole-room image pair. It is better to complete the conceptual arc with fewer examples than to end after generation without investigation.
 
 ## Post-session and reset
 
@@ -871,20 +927,21 @@ The deck does not persist its own room state. Reloading the page clears:
 - room-added perspective possibilities;
 - the current prediction seed, corpus anchor, phrase history, frequency reveal, and source reveal;
 - output-labeling selections;
-- the selected prompt set; and
-- the tally denominator and counts.
+- the selected prompt set, Slide 14 control side, edited phrase, and three local descriptions; and
+- unsent Slide 16 text and selected inquiry move.
 
 After the session:
 
 1. If you need a record of aggregate findings, copy them into separate facilitator notes before reloading. The canonical deck does not save them.
-2. Reload the page and confirm it returns to Slide 1 with `1 / 16`.
+2. Reload the page and confirm it returns to Slide 1 with `1 / 17`.
 3. Close external Long Story Short and image-tool tabs.
 4. Follow each external service's own history or deletion controls if anything was generated there; reloading this deck does not clear an external account's history.
 5. Do not preserve participant names, private prompts, generated images, or identifiable notes in the canonical folder.
+6. Remember that reloading clears unsent Slide 16 fields but does not delete any response already submitted to Google Forms; use Google’s own controls for externally stored responses.
 
 ## Concise rehearsal checklist
 
-- [ ] Open the correct canonical `index.html`; confirm `1 / 16`.
+- [ ] Open the correct canonical `index.html`; confirm `1 / 17`.
 - [ ] Confirm `corpus-data.js` loads with no startup error.
 - [ ] Test projector fit at 100% zoom and full screen.
 - [ ] Test the Long Story Short embed and direct-link fallback on the venue network.
@@ -895,13 +952,16 @@ After the session:
 - [ ] Rehearse Slide 10’s four-sentence takeaway exactly; do not collapse “no matching source passage” into “a language model never uses or reproduces sources.”
 - [ ] If using a saved real model error on Slide 11, keep it outside the public repository and prepare the model/tool, prompt and context, generation date, public correction source, and corrected fact together.
 - [ ] Plan to collect two or three proposed next tests aloud on Slide 13 without entering them into the deck.
-- [ ] Switch both prompt sets on Slide 12 and confirm the Slide 14 A/B legend follows the selection.
+- [ ] Switch both prompt sets on Slide 12 and confirm Slide 14's matching set selector follows the selection, defaults to Prompt B as the control after a set change, and clears its local test.
 - [ ] Practice labeling and clearing one phrase on Slide 11.
-- [ ] Practice setting the denominator before entering A/B observations on Slide 14.
-- [ ] Rehearse the three accuracy statements: corpus frequency is not truth, lookup is not an LLM, and the room tally does not isolate a cause.
+- [ ] On Slide 14, test both A/B controls, the phrase-only edit, the literal prompt diff, Restore control, and all three local description fields; confirm changing the set/control and reloading clear the expected state.
+- [ ] Rehearse the three accuracy statements: corpus frequency is not truth, lookup is not an LLM, and the repeat/edit/return sequence does not isolate a cause or prove a fixed default.
 - [ ] Rehearse the participation and privacy language before laptops open.
-- [ ] Inspect optional Slide 16 for projector fit; rehearse its separate deck and Spring-class scopes, class midpoint and scenario span, de-identified aggregate inputs, national-scale and water-boundary caveats, and public-build safeguards.
-- [ ] Plan to stop at Slide 15 unless the room asks an authorship or environmental-cost question.
+- [ ] Inspect optional Slide 16 for projector fit; confirm its full-canvas 1 → 2 → 3 order, brief Q1/Q3 answering cues, the Part One/Part Two/Part Three map inside the first three Q2 choices, the three exact question titles and Q2 values, Q1/Q2 required and Q3 optional, Other write-in behavior, direct-form route, privacy copy, ARIA status, and keyboard containment without sending a response.
+- [ ] Activate Slide 16’s separate optional accounting control; confirm that it opens Slide 17 without submitting, validating, clearing, or changing the feedback form.
+- [ ] Rehearse the Slide 16 boundary: prefer private-device entry; projected typing is room-visible; no name/email is requested; Google Forms receives responses only on Send; Google’s privacy terms apply; do not enter private, student, personnel, or school information; the deck retains no copy; reload clears unsent fields only.
+- [ ] Inspect optional Slide 17 for projector fit; rehearse its contribution range plots and Energy / CO₂ / Water selector. Confirm that the four circle areas, values, units, deck/class scenario-range labels, and boundary note change together; exactly one circle is marked **Scale anchor · largest in this view**; circle areas are compared only within one metric; the six-hour U.S./Bangladesh values are labeled as per-resident scale references; the class remains a separate course scope; and the expanded **method, not people** safeguard rationale remains legible.
+- [ ] Keep Slide 15 as the pedagogical close; decide separately whether to offer Slide 16 feedback and whether Slide 17's accounting afterword serves the room.
 - [ ] Decide in advance which examples to cut if time compresses.
 - [ ] Reload once at the end and confirm all interaction state clears.
 
@@ -914,6 +974,7 @@ When in doubt, keep these statements exact:
 - The activity is a transparent whole-word lookup anchored to exact corpus occurrences. It does not use suffix backoff and is not a miniature language model.
 - Both the corpus machine and a language model narrow possible continuations using the text so far. This machine counts exact matches. A language model uses learned patterns and can produce fluent text without a matching source passage. That is why fluency still needs verification.
 - The image activity is exploratory. A changed prompt phrase, tool differences, settings, and randomness can all affect a result.
-- The tally describes this room's reported outputs. It does not establish why a pattern occurred.
-- The deck does not solicit or transmit participant submissions. A facilitator-entered perspective idea stays only in page memory and clears on reload; external sites have their own data practices.
-- Slide 16 is an optional afterword. Its estimates are modeled rather than metered. The workshop deck and Spring-class rows are separate scopes; the class midpoint combines modeled teacher preparation and student use from de-identified aggregate totals, and its wide span is a scenario envelope dominated by video mix and retries. National comparisons are scale references rather than matched footprints.
+- Slide 14 records this room's descriptions of three unchanged runs, one edited run, and one return run. It does not quantify identity, establish that wording caused an outcome, or prove that a recurring feature is a fixed default.
+- The required lesson on Slides 1–15 does not solicit or transmit participant submissions. A facilitator-entered perspective idea stays only in page memory and clears on reload; external sites have their own data practices.
+- Slide 16 is optional feedback. Its Q1/Q3 cues support brief responses, and its first three Q2 choices map to the lesson’s Meaning, Prediction, and Investigation parts without changing their Google Forms values. Prefer its direct form on a private device because projected typing is visible to the room. It requests no name or email and sends entered responses directly to Google Forms only when Send is pressed. The separate Slide 17 control does not submit the form. Google applies its own privacy terms. The deck retains no response copy; reload clears unsent text and choices but cannot delete a submitted Google response.
+- Slide 17 is an optional afterword and the deck's literal ending. Its project estimates are modeled rather than metered. The Energy / CO₂ / Water selector re-scales four circle areas within the active metric and changes the compact deck/class scenario-range strip. The workshop deck and course-scoped Spring-class scenario remain separate. Six-hour U.S./Bangladesh per-resident values provide scale only; six hours matches the deck build, not the class duration, and the carbon and water comparisons use different accounting boundaries.

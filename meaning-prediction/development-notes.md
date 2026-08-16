@@ -8,13 +8,13 @@ The title **Meaning ↔ Prediction** names a reciprocal relationship. Context an
 
 ## Instructional sequence
 
-The 16-slide lesson has three related parts with a repeated layout and distinct color treatment:
+The 17-slide deck has a 15-slide lesson followed by two optional slides. The required lesson has three related parts with a repeated layout and distinct color treatment:
 
 - **Meaning** uses lived and local context to show why the same words can support different interpretations.
 - **Prediction** moves from a visible counting pipeline to an interactive exact-match corpus game, then draws a careful boundary between that mechanism and a language model.
-- **Investigation** changes one phrase in an image prompt, compares the results, and separates visible shorthand from the relationship or activity an image cannot prove.
+- **Investigation** compares an image-prompt pair, repeats one selected control prompt, edits one phrase, returns to the control, and separates room-authored descriptions from a causal claim.
 
-Neutral opening and closing slides frame those three parts. Slide 15 remains the lesson's intended close; Slide 16 is an optional transparency afterword. Slide counts remain visible; projected time estimates do not.
+Neutral opening and closing slides frame those three parts. Slide 15 remains the lesson's pedagogical close. Slide 16 offers optional feedback, and Slide 17 is the optional transparency afterword and literal ending. Slide counts remain visible; projected time estimates do not.
 
 ## Projection and visual system
 
@@ -60,7 +60,13 @@ Punctuation travels with the phrase it completes. A comma or period is never off
 
 Part Three is a room investigation, not a controlled benchmark. One willing participant at a table makes A and B in the same familiar tool and changes only the highlighted phrase. Tools may vary across tables, so tool, model, settings, and randomness remain possible causes.
 
-The room first compares what changed, then names visual shortcuts and what the still image cannot show. The final tally counts two prompt-specific visible arrangements only when they are clear. Its persistent guardrail is that a visual shortcut is not the relationship itself: a still image cannot show whether listening, instruction, or collaboration is actually happening.
+The room first compares what changed, names visible evidence, and proposes one word, phrase, or repetition to test. Slide 14 then uses a fixed three-round sequence:
+
+1. **Repeat** the selected control prompt three times and describe what recurred or varied.
+2. **Specify** by editing only the highlighted phrase and describe the edited image.
+3. **Return** to the original control wording and describe one more image before making a claim.
+
+Prompt A or B can serve as the control, and the choice follows the prompt set selected on Slide 12. The page computes only a literal prompt-text difference; it never compares the room’s descriptions or prints a same/different, default, or causal verdict. Repeating or returning adds observations but does not isolate wording from sampling, settings, the tool, or the model. The three description fields stay in page memory, clear on reload, and should contain no names or private information.
 
 ## Corpus boundary and counting method
 
@@ -91,21 +97,32 @@ The room-facing distinction is:
 
 The lesson does not claim that language models never reproduce source text, that every non-matching output is false, or that exact corpus frequencies reproduce model training or generation.
 
+## Optional feedback
+
+Slide 16 asks three bounded questions after the lesson. The form uses the full projected canvas in reading order: Questions 1 and 2 sit side by side, and the larger optional Question 3 writing area spans the width below. Q1 and Q3 include brief answering cues. The first three Q2 options double as a visual map of the lesson—Part One · Meaning · Slides 5–7, Part Two · Prediction · Slides 8–11, and Part Three · Investigation · Slides 12–14—while retaining the exact Google Forms values. A separate optional control after the questions opens Slide 17 without validating, submitting, clearing, or changing feedback.
+
+The form requests no name or email and sends only explicitly submitted response fields directly to Google Forms. The deck has no response database or retained copy. Private-device entry through the direct form is preferable because anything typed on the shared screen is visible to the room. Unsent fields clear on reload; Google applies its own privacy terms to submitted responses.
+
 ## Optional AI accounting afterword
 
-Slide 16 turns the lesson's verification questions back onto the deck itself. It keeps two contribution lenses separate: human-led direction and judgment, and literal words/code. It also shows modeled energy, carbon, and water scenarios for this workshop deck and the Spring Gen AI class. These are retrospective estimates, not provider telemetry.
+Slide 17 turns the lesson's verification questions back onto the deck itself. It keeps two contribution lenses separate—human-led direction and judgment, and literal words/code—and shows them as common-axis ranges rather than a false 100% ownership score.
 
-The deck and class are separate scopes. The class midpoint models teacher preparation and student use from de-identified aggregate totals; its 0.8–81 kWh envelope is a scenario range, not a confidence interval, because video mix and retries are unknown. U.S. and Bangladesh figures are national per-resident scale references, not claims about where computation ran or equivalent environmental footprints. The water comparison is volume-only because AI operational consumption and municipal withdrawal use different accounting boundaries. Full method and sources are in [`AI-accounting.md`](./AI-accounting.md).
+The resource view switches among Energy, CO₂, and Water so unlike units never share one visual scale. Each view re-scales four circle areas for this deck, the separate Spring-class scenario, and U.S. and Bangladesh six-hour per-resident reference amounts; modeled values stay labeled. **Scale anchor · largest in this view** marks the active maximum. Because the U.S. reference is largest in all three metrics, its full-size circle is a within-tab denominator, not a shared cross-tab scale. The active strip also changes the deck and class scenario ranges.
+
+The estimates are retrospective scenarios, not provider telemetry. The deck and class are separate scopes, and six hours matches the deck's final build window rather than the duration of the Spring-class scenario. National figures provide scale only, not compute-location or equivalent-footprint claims. Modeled AI CO₂e differs from territorial national CO₂, and AI operational water differs from municipal withdrawal, so the water comparison is volume-only.
+
+The expanded safeguard band states the governing principle: **transparency should expose the method—not the people behind the data.** Aggregate-only inputs avoid opening identities or content; ephemeral room state clears so participation does not become a retained record; submit-by-choice feedback goes directly to Google Forms only after a viewer submits it, and the deck keeps no copy. Full method and sources are in [`AI-accounting.md`](./AI-accounting.md).
 
 ## Privacy and reliability boundaries
 
-The static webpage has no analytics, backend, local storage, session storage, or database. Reloading clears its matrix dots, room-added ideas, Prediction Machine state, labels, prompt selection, and tally.
+The static webpage has no analytics, backend, local storage, session storage, or database. Reloading clears its matrix dots, room-added ideas, Prediction Machine state, labels, prompt selection, Slide 14 edited phrase and descriptions, and unsent Slide 16 feedback.
 
 Network boundaries remain:
 
 - Long Story Short is an external embed with a direct-link fallback.
 - Google Fonts is optional; local fallbacks are defined.
 - Any image generator used in Part Three is external and has its own account history and data practices.
+- Optional Slide 16 sends entered feedback fields to Google Forms only after submit; Google has its own terms and data practices.
 
 The lesson should use only generic prompts. Participants should not enter student, personnel, or private school information. Direct model use is optional; observing, recording, questioning, or declining are valid forms of participation.
 

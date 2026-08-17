@@ -1,0 +1,35 @@
+:root { color-scheme: light; --paper: #f8efe1; --card: #fffaf3; --ink: #25211f; --muted: #6d6258; --clay: #bd6737; --clay-dark: #7c3f20; --sage: #dbe6ca; --line: rgba(37, 33, 31, .16); }
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body { margin: 0; color: var(--ink); background: radial-gradient(circle at 92% 4%, rgba(109,123,83,.2), transparent 25rem), var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+a { color: var(--clay-dark); text-underline-offset: 3px; }
+.shell { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 30px 0 72px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.brand { margin: 0; font-size: .84rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.back { font-weight: 750; }
+.hero { padding: clamp(46px, 8vw, 88px) 0 36px; }
+.eyebrow { margin: 0 0 12px; color: var(--clay-dark); font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h1, h2, h3 { color: var(--ink); font-family: Georgia, "Times New Roman", serif; line-height: 1.05; }
+h1 { max-width: 760px; margin: 0; font-size: clamp(3rem, 8vw, 5.8rem); letter-spacing: -.055em; }
+.lede { max-width: 680px; margin: 22px 0 0; color: var(--muted); font-size: 1.15rem; }
+.document { padding: clamp(26px, 5vw, 54px); border: 1px solid var(--line); border-radius: 26px; background: rgba(255,250,243,.86); box-shadow: 0 20px 55px rgba(65,48,34,.1); }
+.document h1 { display: none; }
+.document h2 { margin: 3rem 0 1rem; padding-top: .35rem; font-size: clamp(2rem, 4vw, 2.75rem); letter-spacing: -.035em; }
+.document h2:first-child, .document h1 + h2 { margin-top: 0; }
+.document h3 { margin: 2.1rem 0 .7rem; font-size: 1.35rem; letter-spacing: -.02em; }
+.document p, .document li { max-width: 76ch; }
+.document ul, .document ol { padding-left: 1.35rem; }
+.document li + li { margin-top: .38rem; }
+.document blockquote { margin: 1.35rem 0; border-left: 4px solid var(--clay); padding: .45rem 1.15rem; background: rgba(219,230,202,.5); color: #3e4931; font-family: Georgia, "Times New Roman", serif; font-size: 1.08rem; }
+.document blockquote p { margin: .25rem 0; }
+.document code { border-radius: .3rem; padding: .08rem .32rem; background: #eee5d8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
+.document table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: .94rem; }
+.document th, .document td { border: 1px solid var(--line); padding: .65rem .7rem; vertical-align: top; text-align: left; }
+.document th { background: var(--sage); font-weight: 800; }
+.document tr:nth-child(even) td { background: rgba(248,239,225,.55); }
+.document strong { font-weight: 800; }
+.status { margin: 0; color: var(--muted); }
+.error { border: 1px solid #b34532; border-radius: 12px; padding: 16px; background: #fff0ea; }
+footer { margin-top: 28px; color: var(--muted); font-size: .92rem; }
+@media (max-width: 620px) { .shell { width: min(100% - 24px, 920px); } .topbar { align-items: flex-start; flex-direction: column; } .document { padding: 24px 18px; border-radius: 18px; } .document table { display: block; overflow-x: auto; } }
+@media print { body { background: #fff; } .shell { width: 100%; padding: 0; } .topbar, footer { display: none; } .hero { padding: 0 0 24px; } .document { border: 0; box-shadow: none; padding: 0; } a { color: inherit; } }

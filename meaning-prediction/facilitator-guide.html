@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Facilitator guide for the Meaning and Prediction workshop.">
+  <title>Facilitator Guide · Meaning ↔ Prediction</title>
+  <style>
+    :root { color-scheme: light; --paper: #f8efe1; --card: #fffaf3; --ink: #25211f; --muted: #6d6258; --clay: #bd6737; --clay-dark: #7c3f20; --sage: #dbe6ca; --line: rgba(37, 33, 31, .16); }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; color: var(--ink); background: radial-gradient(circle at 92% 4%, rgba(109,123,83,.2), transparent 25rem), var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    a { color: var(--clay-dark); text-underline-offset: 3px; }
+    .shell { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 30px 0 72px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+    .brand { margin: 0; font-size: .84rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .back { font-weight: 750; }
+    .hero { padding: clamp(46px, 8vw, 88px) 0 36px; }
+    .eyebrow { margin: 0 0 12px; color: var(--clay-dark); font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2, h3 { color: var(--ink); font-family: Georgia, "Times New Roman", serif; line-height: 1.05; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(3rem, 8vw, 5.8rem); letter-spacing: -.055em; }
+    .lede { max-width: 680px; margin: 22px 0 0; color: var(--muted); font-size: 1.15rem; }
+    .guide { padding: clamp(26px, 5vw, 54px); border: 1px solid var(--line); border-radius: 26px; background: rgba(255,250,243,.86); box-shadow: 0 20px 55px rgba(65,48,34,.1); }
+    .guide h1 { display: none; }
+    .guide h2 { margin: 3rem 0 1rem; padding-top: .35rem; font-size: clamp(2rem, 4vw, 2.75rem); letter-spacing: -.035em; }
+    .guide h2:first-child, .guide h1 + h2 { margin-top: 0; }
+    .guide h3 { margin: 2.1rem 0 .7rem; font-size: 1.35rem; letter-spacing: -.02em; }
+    .guide p, .guide li { max-width: 76ch; }
+    .guide ul, .guide ol { padding-left: 1.35rem; }
+    .guide li + li { margin-top: .38rem; }
+    .guide blockquote { margin: 1.35rem 0; border-left: 4px solid var(--clay); padding: .45rem 1.15rem; background: rgba(219,230,202,.5); color: #3e4931; font-family: Georgia, "Times New Roman", serif; font-size: 1.08rem; }
+    .guide blockquote p { margin: .25rem 0; }
+    .guide code { border-radius: .3rem; padding: .08rem .32rem; background: #eee5d8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
+    .guide table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; font-size: .94rem; }
+    .guide th, .guide td { border: 1px solid var(--line); padding: .65rem .7rem; vertical-align: top; text-align: left; }
+    .guide th { background: var(--sage); font-weight: 800; }
+    .guide tr:nth-child(even) td { background: rgba(248,239,225,.55); }
+    .guide strong { font-weight: 800; }
+    .status { margin: 0; color: var(--muted); }
+    .error { border: 1px solid #b34532; border-radius: 12px; padding: 16px; background: #fff0ea; }
+    footer { margin-top: 28px; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 620px) { .shell { width: min(100% - 24px, 920px); } .topbar { align-items: flex-start; flex-direction: column; } .guide { padding: 24px 18px; border-radius: 18px; } .guide table { display: block; overflow-x: auto; } }
+    @media print { body { background: #fff; } .shell { width: 100%; padding: 0; } .topbar, footer { display: none; } .hero { padding: 0 0 24px; } .guide { border: 0; box-shadow: none; padding: 0; } a { color: inherit; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <p class="brand">Meaning ↔ Prediction</p>
+      <a class="back" href="./">Open presentation →</a>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Facilitator materials</p>
+        <h1 id="page-title">Facilitator guide</h1>
+        <p class="lede">Preparation, slide-by-slide moves, language, contingencies, and a rehearsal checklist for leading the room.</p>
+      </section>
+      <article class="guide" id="guide" aria-live="polite"><p class="status">Loading guide…</p></article>
+    </main>
+    <footer>Source: <a href="./facilitator-guide.md">facilitator-guide.md</a> · The Markdown file remains the editable source.</footer>
+  </div>
+  <script>
+    const guide = document.getElementById('guide');
+    const escapeHtml = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const safeUrl = (url) => /^(https?:|mailto:|\.\/|\.\.\/|\/|#)/i.test(url) ? url : '#';
+    function inline(text) {
+      let html = escapeHtml(text);
+      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\[([^\]]+)\]\(([^\s)]+)\)/g, (_, label, url) => `<a href="${safeUrl(url)}">${label}</a>`);
+      return html;
+    }
+    function isTableSeparator(line) { return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line); }
+    function tableCells(line) { return line.trim().replace(/^\||\|$/g, '').split('|').map(cell => inline(cell.trim())); }
+    function render(markdown) {
+      const lines = markdown.replace(/\r\n?/g, '\n').split('\n');
+      const out = []; let i = 0;
+      while (i < lines.length) {
+        const line = lines[i];
+        if (!line.trim()) { i++; continue; }
+        const heading = line.match(/^(#{1,3})\s+(.+)$/);
+        if (heading) { const level = heading[1].length; out.push(`<h${level}>${inline(heading[2])}</h${level}>`); i++; continue; }
+        if (i + 1 < lines.length && line.includes('|') && isTableSeparator(lines[i + 1])) {
+          const headers = tableCells(line); i += 2; const rows = [];
+          while (i < lines.length && lines[i].includes('|') && lines[i].trim()) { rows.push(tableCells(lines[i++])); }
+          out.push(`<table><thead><tr>${headers.map(cell => `<th>${cell}</th>`).join('')}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table>`); continue;
+        }
+        if (/^>\s?/.test(line)) { const quote = []; while (i < lines.length && /^>\s?/.test(lines[i])) quote.push(lines[i++].replace(/^>\s?/, '')); out.push(`<blockquote><p>${inline(quote.join(' '))}</p></blockquote>`); continue; }
+        const unordered = line.match(/^[-*]\s+(.+)$/); const ordered = line.match(/^\d+\.\s+(.+)$/);
+        if (unordered || ordered) { const tag = ordered ? 'ol' : 'ul'; const pattern = ordered ? /^\d+\.\s+(.+)$/ : /^[-*]\s+(.+)$/; const items = []; while (i < lines.length && pattern.test(lines[i])) items.push(inline(lines[i++].match(pattern)[1])); out.push(`<${tag}>${items.map(item => `<li>${item}</li>`).join('')}</${tag}>`); continue; }
+        const paragraph = [line.trim()]; i++; while (i < lines.length && lines[i].trim() && !/^(#{1,3})\s+|^[-*]\s+|^\d+\.\s+|^>\s?/.test(lines[i]) && !(lines[i].includes('|') && isTableSeparator(lines[i + 1] || ''))) paragraph.push(lines[i++].trim()); out.push(`<p>${inline(paragraph.join(' '))}</p>`);
+      }
+      return out.join('\n');
+    }
+    fetch('./facilitator-guide.md').then(response => { if (!response.ok) throw new Error('Guide unavailable'); return response.text(); }).then(markdown => { guide.innerHTML = render(markdown); }).catch(() => { guide.innerHTML = '<p class="error">The guide could not load. <a href="./facilitator-guide.md">Open the Markdown source</a>.</p>'; });
+  </script>
+</body>
+</html>
